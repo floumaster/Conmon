@@ -3,12 +3,12 @@ import colors from '../../constants/colors'
 
 export default StyleSheet.create({
     chartContainer: {
-        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '50%',
     },
     chartTextWrapper: {
         position: 'absolute',
-        top: 50,
-        left: 60,
         width: 100,
         alignItems: 'center',
     },
@@ -20,7 +20,7 @@ export default StyleSheet.create({
     mainChartText: {
         marginTop: 10,
         color: colors.white,
-        fontSize: 30,
+        fontSize: 28,
         fontWeight: 'bold'
     },
 })

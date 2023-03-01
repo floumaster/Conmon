@@ -3,37 +3,45 @@ import colors from '../../constants/colors'
 
 export default StyleSheet.create({
     spendingItemMark: {
-        top: 4,
-        width: 12,
-        height: 12,
-        backgroundColor: 'red',
+        width: 40,
+        height: 40,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 8
-    },
-    spendingItemSubMark: {
-        width: 8,
-        height: 8,
-        borderRadius: 50,
-        backgroundColor: colors.primary,
     },
     spendingItem: {
         flexDirection: 'row',
         marginBottom: 20
     },
     spendingList: {
-        paddingTop: 30,
+        paddingTop: 10,
         paddingLeft: 30,
-        height: 250,
+        height: '45%',
     },
-    spendingItemName: {
-        color: colors.subText,
-        fontWeight: 'bold',
-        fontSize: 12
+    spendingTitleWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '50%'
+    },
+    spendingItemTitle: {
+        fontSize: 16,
+        color: colors.white,
+        marginLeft: 10
+    },
+    spendingItemValueWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '50%'
+    },
+    spendingItemPercent: {
+        width: 50,
+        fontSize: 16,
+        color: colors.white,
     },
     spendingItemValue: {
+        fontSize: 16,
         color: colors.subText,
-        fontSize: 10
     }
 })

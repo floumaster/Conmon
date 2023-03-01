@@ -1,21 +1,28 @@
 import React from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import styles from './SpendingList.style'
+import Settings from '../Icons/Settings'
 
-const SpendingList = () => {
+const SpendingList = ({ sections }) => {
+    
     return (
         <View style={styles.spendingList}>
-            <ScrollView showsVerticalScrollIndicator={false}> 
+            <ScrollView
+                scrollEventThrottle={16}
+            > 
                 {
-                    [0,0,0,0,0,0,0,0,0,0].map(el => {
+                    sections.map(section => {
                         return (
                             <View style={styles.spendingItem}>
-                                <View style={styles.spendingItemMark}>
-                                    <View style={styles.spendingItemSubMark}/>
+                                <View style={styles.spendingTitleWrapper}>
+                                    <View style={[styles.spendingItemMark, {backgroundColor: section.color}]}>
+                                        <Settings width={25}/>
+                                    </View>
+                                    <Text style={styles.spendingItemTitle}>{section.name}</Text>
                                 </View>
-                                <View style={styles.spendingItemTextContainer}>
-                                    <Text style={styles.spendingItemName}>Taxes</Text>
-                                    <Text style={styles.spendingItemValue}>$200</Text>
+                                <View style={styles.spendingItemValueWrapper}>
+                                    <Text style={styles.spendingItemPercent}>{section.percentage}%</Text>
+                                    <Text style={styles.spendingItemValue}>{section.amount}$</Text>
                                 </View>
                             </View>
                         )

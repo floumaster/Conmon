@@ -1,35 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 import Pie from 'react-native-pie'
 import colors from '../../constants/colors'
 import styles from './PieChart.style'
 
-const PieChart = () => {
+const PIE_CHART_RADIUS = 110
+const PIE_CHART_INNER_RADIUS = 85
+const PIE_CHART_DIVIDER_SIZE = 1
+
+const PieChart = ({ sections }) => {
+
     return (
         <View style={styles.chartContainer}>
             <Pie
-                radius={110}
-                innerRadius={90}
-                dividerSize={1}
+                radius={PIE_CHART_RADIUS}
+                innerRadius={PIE_CHART_INNER_RADIUS}
+                dividerSize={PIE_CHART_DIVIDER_SIZE}
                 backgroundColor={colors.primary}
-                sections={[
-                    {
-                    percentage: 10,
-                    color: '#C70039',
-                    },
-                    {
-                    percentage: 20,
-                    color: '#44CD40',
-                    },
-                    {
-                    percentage: 30,
-                    color: '#404FCD',
-                    },
-                    {
-                    percentage: 40,
-                    color: '#EBD22F',
-                    },
-                ]}
+                sections={sections}
                 strokeCap={'butt'}
                 />
                 <View style={styles.chartTextWrapper}>

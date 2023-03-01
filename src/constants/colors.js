@@ -3,5 +3,7 @@ export default {
     primary: '#2C3359',
     textPrimary: '#c7c7c7',
     subText: '#757575',
-    white: '#fff'
+    white: '#fff',
+    whiteBlue: '#00e0ff',
+    green: '#00eb14'
 }

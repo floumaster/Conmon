@@ -3,10 +3,11 @@ import colors from './../../constants/colors'
 
 export default StyleSheet.create({
     statsContainer: {
-        flexDirection: 'row'
+        justifyContent: 'center',
+        
     },
     tabHeader: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     welcomeText: {
         color: colors.textPrimary,
@@ -16,4 +17,7 @@ export default StyleSheet.create({
         color: colors.subText,
         fontSize: 12
     },
+    tabWrapper: {
+        flex: 1
+    }
 })
