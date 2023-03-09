@@ -1,19 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import screenNames from '../../constants/screenNames';
-import Home from '../../components/Screens/Home';
-import Finances from '../../components/Screens/Finances';
-import Categories from '../../components/Screens/Categories';
-import Charts from '../../components/Screens/Charts';
-
 import CustomTabBar from './CustomTabBar';
-import HomeIcon from '../../components/Icons/Home';
-import Chart from '../../components/Icons/Chart';
-import CategoriesIcon from '../../components/Icons/Categories';
-import Money from '../../components/Icons/Money';
+
+import Home from 'components/Screens/Home';
+import Charts from 'components/Screens/Charts';
 import CategoryNavigator from '../CategoryNavigator';
-import colors from '../../constants/colors';
+import SpendingNavigator from '../SpendingNavigator';
+
+import screenNames from 'constants/screenNames';
+import HomeIcon from 'components/Icons/Home';
+import Chart from 'components/Icons/Chart';
+import CategoriesIcon from 'components/Icons/Categories';
+import Money from 'components/Icons/Money';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +23,7 @@ export default function RootNavigator() {
           screenOptions={{
               headerShown: false,
           }}
-          initialRouteName={screenNames.Finances}
+          initialRouteName={screenNames.Spendings}
           tabBar={props => <CustomTabBar {...props}/>}
         >
             <Tab.Screen
@@ -39,8 +38,8 @@ export default function RootNavigator() {
               }}
             />
             <Tab.Screen
-              name={screenNames.Finances}
-              component={Finances}
+              name={screenNames.SpendingsStack}
+              component={SpendingNavigator}
               options={({ route }) => {
                 return {
                   tabBarVisible: true,

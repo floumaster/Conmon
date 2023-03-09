@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native'
-import Tab from '../Tab';
-import styles from './Header.style'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import colors from '../../constants/colors';
-import Cap from '../Icons/Cap';
-import Settings from '../Icons/Settings';
-import Bell from '../Icons/Bell';
+
+import styles from './Header.style'
+import Tab from 'components/Tab';
+import Cap from 'components/Icons/Cap';
+import Settings from 'components/Icons/Settings';
+import Bell from 'components/Icons/Bell';
 
 
 

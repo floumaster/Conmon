@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import { View, FlatList, TouchableOpacity, Text } from 'react-native'
+import { useSelector } from 'react-redux'
 import styles from './Categories.style'
-import Tab from '../../Tab'
-import Tax from '../../Icons/Tax'
-import Plus from '../../Icons/Plus'
-import colors from '../../../constants/colors'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { useDispatch, useSelector } from 'react-redux'
-import { addCategory } from '../../../redux/categorySlice'
-import screenNames from '../../../constants/screenNames'
-import iconMap from '../../../../utils/iconMap'
+import colors from 'constants/colors'
+import Tab from 'components/Tab'
+import Plus from 'components/Icons/Plus'
+import screenNames from 'constants/screenNames'
+import iconMap from '../../../utils/iconMap'
 
 const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCategoryId, navigation) => {
     const Icon = iconMap[item.iconName]

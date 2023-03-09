@@ -6,8 +6,13 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import colors from '../../constants/colors'
 import Tax from '../Icons/Tax'
 import Plus from '../Icons/Plus'
+import screenNames from '../../constants/screenNames'
 
-const TasksList = () => {
+const TasksList = ({ navigation }) => {
+
+    const navigateToCreateSpending = () => {
+        navigation.navigate(screenNames.SpendingCreate)
+    }
 
     const renderSpendingListItem = ({ item, index }) => {
         return (
@@ -38,7 +43,7 @@ const TasksList = () => {
                             </View>
                         </View>
                     ) : (
-                        <TouchableOpacity style={styles.spendingWrapperNew}>
+                        <TouchableOpacity style={styles.spendingWrapperNew} onPress={navigateToCreateSpending}>
                             <Text style={styles.spendingTitle}>Add new spending</Text>
                             <View style={styles.newSpendingButtonWrapper}>
                                 <Plus fill={colors.white}/>
@@ -61,7 +66,8 @@ const TasksList = () => {
     )
 }
 
-const TasksListWrapper = () => {
+const TasksListWrapper = ({ navigation }) => {
+    console.log("navigation", navigation)
 
     const [isPlannedSpendingsShown, setIsPlannedSpendingsShown] = useState(true)
 
@@ -93,7 +99,7 @@ const TasksListWrapper = () => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <TasksList />
+            <TasksList navigation={navigation} />
         </Tab>
     )
 }

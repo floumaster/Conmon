@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { View, FlatList, TouchableOpacity, Text, TextInput } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
-import styles from './CategoryCreate.style'
 import Tab from 'components/Tab'
+import styles from './SpendingCreate.style'
 import BackArrow from 'components/Icons/BackArrow'
 import colors from 'constants/colors'
 import screenNames from 'constants/screenNames'
 import Tag from 'components/Icons/Tag'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
-import iconMap from '../../../utils/iconMap'
+import iconMap from 'utils/iconMap'
 import { addCategory, editCategory } from 'redux/categorySlice'
 
 const renderIcon = ({item, index}, chosenIconName, setChosenIconName, categoryColor) => {
@@ -71,9 +71,10 @@ const CategoryCreate = ({ navigation, route }) => {
     }
 
     return (
+        
         <View style={styles.wrapper}>
             <Tab
-                headerTitle={categoryInfo ? "Edit the category" : "Create a new category"}
+                headerTitle={categoryInfo ? "Edit the spending" : "Create a new spending"}
                 style={{flex: 1}}
                 HeaderIconLeft={() => <BackArrow width={20} fill={colors.white} onPress={navigation.goBack} />}
             >

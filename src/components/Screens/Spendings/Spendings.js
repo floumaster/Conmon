@@ -1,13 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
-import styles from './Finances.style'
+import styles from './Spendings.style'
 import Tab from '../../Tab'
 import TasksList from '../../TasksList'
 
-const Finances = () => {
+const Finances = ({ navigation }) => {
     return (
         <View style={styles.wrapper}>
-            <TasksList />
+            <TasksList navigation={navigation} />
         </View>
     )
 }

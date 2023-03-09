@@ -1,9 +1,11 @@
 import React from 'react'
-import Categories from '../../components/Screens/Categories'
-import CategoryCreate from '../../components/Screens/CategoryCreate'
-import ColorPicker from '../../components/Screens/ColorPicker'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import screenNames from '../../constants/screenNames'
+
+import Categories from 'components/Screens/Categories'
+import CategoryCreate from 'components/Screens/CategoryCreate'
+import ColorPicker from 'components/Screens/ColorPicker'
+
+import screenNames from 'constants/screenNames'
 
 const Stack = createNativeStackNavigator()
 

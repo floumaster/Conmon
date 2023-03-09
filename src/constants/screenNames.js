@@ -1,6 +1,8 @@
 export default {
     Home: 'Home',
-    Finances: 'Finances',
+    Spendings: 'Spendings',
+    SpendingCreate: 'SpendingCreate',
+    SpendingsStack: 'SpendingsStack',
     CategoriesStack: 'CategoriesStack',
     Categories: 'Categories',
     CategoryCreate: 'CategoryCreate',

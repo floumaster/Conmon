@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, Animated, ScrollView, useEffect } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
-import { addSpending } from '../../redux/spendingsSlice'
+import { View, Text } from 'react-native'
+import { useSelector } from 'react-redux'
+
 import styles from './HomeStats.style'
-import PieChart from '../PieChart'
-import SpendingList from '../SpendingList'
-import Tab from '../Tab'
+import PieChart from 'components/PieChart'
+import SpendingList from 'components/SpendingList'
+import Tab from 'components/Tab'
 
 const HomeStats = () => {
 
