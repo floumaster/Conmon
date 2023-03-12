@@ -69,6 +69,24 @@ const styles = StyleSheet.create({
     },
     createButtonWrapper: {
         padding: 10,
+    },
+    partTitle: {
+        fontSize: 15,
+        color: colors.textPrimary,
+        marginBottom: 10
+    },
+    partWithTextTitle: {
+        fontSize: 15,
+        color: colors.textPrimary,
+        marginBottom: 20
+    },
+    partWrapper: {
+        marginBottom: 20,
+    },
+    partWithTimeWrapper: {
+        marginBottom: 20,
+        display: 'flex',
+        alignItems: 'flex-start'
     }
 })
 

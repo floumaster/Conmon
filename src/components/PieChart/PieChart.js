@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 import Pie from 'react-native-pie'
 
-import colors from 'constants/colors'
+import colors from '../../constants/colors'
 import styles from './PieChart.style'
 
 const PIE_CHART_RADIUS = 110

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { View, FlatList, TouchableOpacity, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 import styles from './Categories.style'
-import colors from 'constants/colors'
-import Tab from 'components/Tab'
-import Plus from 'components/Icons/Plus'
-import screenNames from 'constants/screenNames'
+import colors from '../../../constants/colors'
+import Tab from '../../Tab'
+import Plus from '../../Icons/Plus'
+import screenNames from '../../../constants/screenNames'
 import iconMap from '../../../utils/iconMap'
 
 const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCategoryId, navigation) => {
@@ -49,6 +49,7 @@ const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCatego
 
 const Categories = ({ navigation }) => {
     const [activeCategoryId, setActiveCategoryId] = useState(0)
+    useSelector(store => console.log(store.categories.categories))
     const categoryList = useSelector(store => store.categories.categories)
     const modifiedCategoryList = [0, ...categoryList]
     return (

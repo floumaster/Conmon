@@ -3,13 +3,13 @@ import { View, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import styles from './HomeStats.style'
-import PieChart from 'components/PieChart'
-import SpendingList from 'components/SpendingList'
-import Tab from 'components/Tab'
+import PieChart from '../PieChart'
+import SpendingList from '../SpendingList'
+import Tab from '../Tab'
 
 const HomeStats = () => {
 
-    const spendings = useSelector(store => store.spendings.spendings)
+    const spendings = useSelector(store => store.spendings?.spendings)
 
     const getSectionsFromSpendings = () => {
         const sum = spendings.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0)

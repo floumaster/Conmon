@@ -1,5 +1,5 @@
 import React from "react";
-import IconWrapper from "components/Icons/IconWrapper";
+import IconWrapper from "../Icons/IconWrapper";
 
 
 const createIcon = (Icon, {width, height}) => {

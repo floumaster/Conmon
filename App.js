@@ -7,8 +7,7 @@ import {
 import colors from './src/constants/colors';
 import RootNavigator from './src/navigation/RootNavigator/RootNavigator'
 import { Provider } from 'react-redux';
-import { store } from './src/redux';
-
+import { store } from './src/reduxManager/index';
 
 function App() {
 

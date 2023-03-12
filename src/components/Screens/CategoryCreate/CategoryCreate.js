@@ -3,14 +3,14 @@ import { View, FlatList, TouchableOpacity, Text, TextInput } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './CategoryCreate.style'
-import Tab from 'components/Tab'
-import BackArrow from 'components/Icons/BackArrow'
-import colors from 'constants/colors'
-import screenNames from 'constants/screenNames'
-import Tag from 'components/Icons/Tag'
-import PrimaryButton from 'components/Buttons/PrimaryButton'
+import Tab from '../../Tab'
+import BackArrow from '../../Icons/BackArrow'
+import colors from '../../../constants/colors'
+import screenNames from '../../../constants/screenNames'
+import Tag from '../../Icons/Tag'
+import PrimaryButton from '../../Buttons/PrimaryButton'
 import iconMap from '../../../utils/iconMap'
-import { addCategory, editCategory } from 'redux/categorySlice'
+import { addCategory, editCategory } from '../../../reduxManager/categorySlice'
 
 const renderIcon = ({item, index}, chosenIconName, setChosenIconName, categoryColor) => {
     const Icon = iconMap[item]

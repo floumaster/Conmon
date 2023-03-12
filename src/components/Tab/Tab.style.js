@@ -6,6 +6,7 @@ export default StyleSheet.create({
         backgroundColor: colors.primary,
         padding: 20,
         borderRadius: 20,
+        overflow: 'hidden',
     },
     screenTitle: {
         color: colors.white,

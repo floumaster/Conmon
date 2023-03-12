@@ -3,16 +3,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CustomTabBar from './CustomTabBar';
 
-import Home from 'components/Screens/Home';
-import Charts from 'components/Screens/Charts';
+import Home from '../../components/Screens/Home'
+import Charts from '../../components/Screens/Charts';
 import CategoryNavigator from '../CategoryNavigator';
 import SpendingNavigator from '../SpendingNavigator';
 
-import screenNames from 'constants/screenNames';
-import HomeIcon from 'components/Icons/Home';
-import Chart from 'components/Icons/Chart';
-import CategoriesIcon from 'components/Icons/Categories';
-import Money from 'components/Icons/Money';
+import screenNames from '../../constants/screenNames';
+import HomeIcon from '../../components/Icons/Home';
+import Chart from '../../components/Icons/Chart';
+import CategoriesIcon from '../../components/Icons/Categories';
+import Money from '../../components/Icons/Money';
 
 const Tab = createBottomTabNavigator();
 
