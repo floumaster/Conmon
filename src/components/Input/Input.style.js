@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     titleInputWrapper: {
         flexDirection: 'row',
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     iconWrapper: {
         width: 40,

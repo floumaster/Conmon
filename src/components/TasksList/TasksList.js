@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
+
 import styles from './TasksList.style'
 import Tab from '../Tab'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
@@ -7,21 +9,46 @@ import colors from '../../constants/colors'
 import Tax from '../Icons/Tax'
 import Plus from '../Icons/Plus'
 import screenNames from '../../constants/screenNames'
+import iconMap from '../../utils/iconMap'
+import Done from '../Icons/Done'
+import Clock from '../Icons/Clock'
+import Input from '../Input'
 
-const TasksList = ({ navigation }) => {
+const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown }) => {
 
-    const navigateToCreateSpending = () => {
-        navigation.navigate(screenNames.SpendingCreate)
+    const processedSpendings = [0, ...spendings]
+
+    const navigateToCreateSpending = (isSpendingScheduled) => {
+        navigation.navigate(screenNames.SpendingCreate, {
+            isSpendingScheduled
+        })
     }
 
     const renderSpendingListItem = ({ item, index }) => {
+        const comment = item.comment || ''
+
+        const processedComment = comment.length > 20 ? `${comment.slice(0, 20)}...` : comment
+
+        const status = item.isCompleted ? 'Completed' : 'Waiting to complete'
+
+        const Icon = iconMap[categories.find(cat => cat.id === item.categoryId)?.iconName]
+
+        const additionalMarkerWrapperStyle = item.isCompleted ? styles.done : styles.notDone
+
+        const Statusicon = item.isCompleted ? Done : Clock
+
         return (
             <>
                 {
                     index ? (
                         <View style={styles.spendingWrapper}>
-                            <Text style={styles.spendingTitle}>LYFT Savings</Text>
-                            <Text style={styles.spendingDescription}>Wants Management</Text>
+                            <View style={styles.spendingTitleWrapper}>
+                                <Text style={styles.spendingTitle}>{item.name}</Text>
+                                <View style={[styles.markerWrapper, additionalMarkerWrapperStyle]}>
+                                    <Statusicon width={18} fill={colors.white}/>
+                                </View>
+                            </View>
+                            <Text style={styles.spendingDescription}>{processedComment}</Text>
                             <View style={styles.spendingStatsWrapper}>
                                 <AnimatedCircularProgress
                                     size={50}
@@ -33,17 +60,17 @@ const TasksList = ({ navigation }) => {
                                     backgroundColor="#3d5875"
                                 >
                                     {
-                                        () => <Tax width={26} height={26}/>
+                                        () => <Icon width={26} height={26} fill={colors.white}/>
                                     }
                                 </AnimatedCircularProgress>
                                 <View style={styles.spendingStatsTextWrapper}>
-                                    <Text style={styles.spendingStatsValue}>$29389</Text>
-                                    <Text style={styles.spendingStatsText}>Waiting to complete</Text>
+                                    <Text style={styles.spendingStatsValue}>${item.amount}</Text>
+                                    <Text style={styles.spendingStatsText}>{status}</Text>
                                 </View>
                             </View>
                         </View>
                     ) : (
-                        <TouchableOpacity style={styles.spendingWrapperNew} onPress={navigateToCreateSpending}>
+                        <TouchableOpacity style={styles.spendingWrapperNew} onPress={() => navigateToCreateSpending(isPlannedSpendingsShown)}>
                             <Text style={styles.spendingTitle}>Add new spending</Text>
                             <View style={styles.newSpendingButtonWrapper}>
                                 <Plus fill={colors.white}/>
@@ -57,7 +84,7 @@ const TasksList = ({ navigation }) => {
 
     return (
         <FlatList style={styles.spendingList}
-            data={[0,0,0,0,0,0,0,0,0]}
+            data={processedSpendings}
             renderItem={renderSpendingListItem}
             numColumns={2}
             columnWrapperStyle={styles.listColumnWrapper}
@@ -67,7 +94,14 @@ const TasksList = ({ navigation }) => {
 }
 
 const TasksListWrapper = ({ navigation }) => {
-    console.log("navigation", navigation)
+
+    const spendings = useSelector(store => store.spendings.spendings)
+
+    const categories = useSelector(store => store.categories.categories)
+
+    const scheduledSpendings = spendings.filter(spending => spending.isScheduled)
+
+    const unplannedSpendings = spendings.filter(spending => !spending.isScheduled)
 
     const [isPlannedSpendingsShown, setIsPlannedSpendingsShown] = useState(true)
 
@@ -85,7 +119,7 @@ const TasksListWrapper = ({ navigation }) => {
                     <Text
                         style={ isPlannedSpendingsShown ? styles.titleActive : styles.title }
                     >
-                        Planned
+                        Scheduled
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -99,7 +133,13 @@ const TasksListWrapper = ({ navigation }) => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <TasksList navigation={navigation} />
+            <Input />
+            <TasksList
+                navigation={navigation}
+                spendings={isPlannedSpendingsShown ? scheduledSpendings : unplannedSpendings}
+                categories={categories}
+                isPlannedSpendingsShown={isPlannedSpendingsShown}
+            />
         </Tab>
     )
 }

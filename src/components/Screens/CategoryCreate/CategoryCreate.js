@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, FlatList, TouchableOpacity, Text, TextInput } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { v4 as uuid } from 'uuid';
 
 import styles from './CategoryCreate.style'
 import Tab from '../../Tab'
@@ -52,7 +53,7 @@ const CategoryCreate = ({ navigation, route }) => {
 
     const createNewCategory = () => {
         dispatch(addCategory({
-            id: categoryLastId + 1,
+            id: uuid(),
             name: categoryTitle,
             color: categoryColor,
             iconName: chosenIconName

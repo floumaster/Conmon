@@ -7,8 +7,9 @@ import Tab from '../../Tab'
 import Plus from '../../Icons/Plus'
 import screenNames from '../../../constants/screenNames'
 import iconMap from '../../../utils/iconMap'
+import BackArrow from '../../Icons/BackArrow'
 
-const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCategoryId, navigation) => {
+const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCategoryId, navigation, onCategorySelect) => {
     const Icon = iconMap[item.iconName]
 
     const processedCategoryTitle = item?.name?.length > 10 ? `${item?.name.slice(0, 9)}...` : item?.name
@@ -24,7 +25,10 @@ const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCatego
                             })
                         }
                         style={activeCategoryId === index ?  [styles.category, {backgroundColor: item.color}] : styles.category}
-                        onPress={() => setActiveCategoryId(index)}
+                        onPress={() => {
+                            setActiveCategoryId(index)
+                            onCategorySelect(item?.id)
+                        }}
                     >
                         <View style={[styles.iconWrapper, {backgroundColor: item.color}]}>
                             <Icon width={35} fill={colors.white}/>
@@ -47,18 +51,29 @@ const renderCategoriesList = ({ index, item }, activeCategoryId, setActiveCatego
     )
 }
 
-const Categories = ({ navigation }) => {
+const Categories = ({ navigation, route }) => {
     const [activeCategoryId, setActiveCategoryId] = useState(0)
-    useSelector(store => console.log(store.categories.categories))
+
     const categoryList = useSelector(store => store.categories.categories)
     const modifiedCategoryList = [0, ...categoryList]
+
+    const isCategorySelectionMode = route?.params?.isCategorySelectionMode
+    const onCategorySelect = isCategorySelectionMode ? route?.params?.onCategorySelect : () => {}
+
     return (
         <View style={styles.wrapper}>
-            <Tab headerTitle="Categories">
+            <Tab
+                headerTitle="Categories"
+                HeaderIconLeft={
+                    isCategorySelectionMode ? 
+                    () => <BackArrow width={20} fill={colors.white} onPress={navigation.goBack} /> : 
+                    null
+                }
+            >
                 <FlatList
                     style={styles.categoriesList}
                     data={modifiedCategoryList}
-                    renderItem={(item) => renderCategoriesList(item, activeCategoryId, setActiveCategoryId, navigation)}
+                    renderItem={(item) => renderCategoriesList(item, activeCategoryId, setActiveCategoryId, navigation, onCategorySelect)}
                     numColumns={3}
                     columnWrapperStyle={styles.listColumnWrapper}
                     contentContainerStyle={styles.listContentContainer}

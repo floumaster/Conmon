@@ -3,12 +3,15 @@ import colors from '../../constants/colors'
 
 export default StyleSheet.create({
     spendingItemMark: {
-        width: 40,
-        height: 40,
+        width: 42,
+        height: 42,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: 8
+        marginRight: 8,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: colors.white,
     },
     spendingItem: {
         flexDirection: 'row',
@@ -43,5 +46,5 @@ export default StyleSheet.create({
     spendingItemValue: {
         fontSize: 16,
         color: colors.subText,
-    }
+    },
 })

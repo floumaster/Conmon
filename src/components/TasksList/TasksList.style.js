@@ -62,7 +62,7 @@ export default StyleSheet.create({
         borderRadius: 7,
         padding: 10,
         width: '48%',
-        height: 115
+        height: 120,
     },
     spendingWrapperNew: {
         backgroundColor: colors.primary,
@@ -73,7 +73,7 @@ export default StyleSheet.create({
         padding: 10,
         width: '48%',
         opacity: 0.3,
-        height: 115
+        height: 120
     },
     newSpendingButtonWrapper: {
         height: '90%',
@@ -90,7 +90,8 @@ export default StyleSheet.create({
         color: colors.subText,
         fontSize: 10,
         marginTop: 5,
-        marginBottom: 10
+        marginBottom: 10,
+        width: '100%'
     },
     spendingStatsWrapper: {
         flexDirection: 'row',
@@ -98,17 +99,16 @@ export default StyleSheet.create({
         columnGap: 15
     },
     spendingStatsTextWrapper: {
-
     },
     spendingStatsValue: {
         color: colors.whiteBlue,
         fontWeight: 'bold',
-        fontSize: 12
+        fontSize: 12,
     },
     spendingStatsText: {
         fontSize: 10,
         color: colors.subText,
-        width: 50
+        width: 60
     },
     taskListRow: {
         flexDirection: 'row',
@@ -116,5 +116,24 @@ export default StyleSheet.create({
         columnGap: 10,
         marginBottom: 10,
         width: '100%'
+    },
+    spendingTitleWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    markerWrapper: {
+        width: 20,
+        height: 20,
+        borderRadius: 50,
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    done: {
+        backgroundColor: colors.green
+    },
+    notDone: {
+        backgroundColor: colors.orange
     }
 })
