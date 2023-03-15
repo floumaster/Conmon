@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import colors from '../../constants/colors'
 
 export default StyleSheet.create({
@@ -135,5 +135,74 @@ export default StyleSheet.create({
     },
     notDone: {
         backgroundColor: colors.orange
+    },
+    inputWrapper:{
+        marginTop: 0,
+        marginBottom: 20,
+        top: 5,
+        width: '90%'
+    },
+    inputWrapperStyle: {
+        top: -5,
+        width: '70%'
+    },
+    sortBar: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    filterIconWrapper: {
+        top: -5,
+        width: 40,
+        height: 40,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: colors.whiteBlue,
+        borderStyle: 'solid',
+        borderWidth: 2,
+    },
+    handleStyle: {
+        backgroundColor: colors.whiteBlue,
+    },
+    filterContentWrapper: {
+        padding: 15
+    },
+    filterTitle: {
+        color: colors.textPrimary,
+        fontSize: 15
+    },
+    filterItemWrapper: {
+        marginBottom: 20,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: colors.textPrimary,
+        padding: 10,
+        borderRadius: 10
+    },
+    checkBoxWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    checkBoxLabel: {
+        marginLeft: 20,
+        color: colors.textPrimary
+    },
+    datePickButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    datePickButtonWrapper: {
+        width: '45%',
+        alignItems: 'center'
+    },
+    commonButtonStyle: {
+        height: 40
+    },
+    date: {
+        marginTop: 10,
+        color: colors.textPrimary
     }
 })

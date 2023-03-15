@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: colors.whiteBlue,
         borderStyle: 'solid',
-        borderWidth: 2
+        borderWidth: 2,
     },
     input: {
         height: 40,

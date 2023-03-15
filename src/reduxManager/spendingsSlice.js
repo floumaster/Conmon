@@ -15,6 +15,8 @@ const spendingsSlice = createSlice({
                 notificationTimeStart: null,
                 isScheduled: true,
                 isCompleted: true,
+                creationDate: new Date,
+                completionDate: new Date
             },
             {
                 id: 'skidfjkldjskfld',
@@ -26,7 +28,9 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: true,
-                isCompleted: true
+                isCompleted: true,
+                creationDate: new Date,
+                completionDate: new Date
             },
             {
                 id: 'skiasdfjkldjskfl',
@@ -38,7 +42,8 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: true,
-                isCompleted: false
+                isCompleted: false,
+                creationDate: new Date
             },
             {
                 id: 'skidfjsdskldjskfld',
@@ -50,7 +55,8 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: true,
-                isCompleted: false
+                isCompleted: false,
+                creationDate: new Date
             },
             {
                 id: 'skidfjkldjskfl',
@@ -62,7 +68,9 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: false,
-                isCompleted: true
+                isCompleted: true,
+                creationDate: new Date,
+                completionDate: new Date
             },
             {
                 id: 'skidfjkldjskfld',
@@ -74,7 +82,9 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: false,
-                isCompleted: true
+                isCompleted: true,
+                creationDate: new Date,
+                completionDate: new Date
             },
             {
                 id: 'skiasdfjkldjskfl',
@@ -86,7 +96,8 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: false,
-                isCompleted: false
+                isCompleted: false,
+                creationDate: new Date,
             },
             {
                 id: 'skidfjsdskldjskfld',
@@ -98,16 +109,29 @@ const spendingsSlice = createSlice({
                 notificationDateStart: null,
                 notificationTimeStart: null,
                 isScheduled: false,
-                isCompleted: false
+                isCompleted: false,
+                creationDate: new Date
             }
         ]
     },
     reducers: {
         addSpending(state, action) {
             state.spendings.push(action.payload)
+        },
+        completeSpending(state, action) {
+            state.spendings = state.spendings.map(spending => {
+                if(spending.id === action.payload.id){
+                    return {
+                        ...spending,
+                        isCompleted: true,
+                        completionDate: action.payload.completionDate
+                    }
+                }
+                return spending
+            })
         }
     }
 })
 
 export default spendingsSlice.reducer
-export const { addSpending } = spendingsSlice.actions
+export const { addSpending, completeSpending } = spendingsSlice.actions

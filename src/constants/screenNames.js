@@ -1,5 +1,6 @@
 export default {
     Home: 'Home',
+    Spending: 'Spending',
     Spendings: 'Spendings',
     SpendingCreate: 'SpendingCreate',
     SpendingsStack: 'SpendingsStack',

@@ -8,14 +8,17 @@ import SpendingList from '../SpendingList'
 import Tab from '../Tab'
 import iconMap from '../../utils/iconMap'
 import moment from 'moment'
+import colors from '../../constants/colors'
 
 const HomeStats = () => {
 
-    const spendings = useSelector(store => store.spendings?.spendings).filter(spending => spending.isCompleted)
+    const spendings = useSelector(store => store.spendings?.spendings)
+    .filter(spending => spending.isCompleted && moment().startOf('month') < moment(spending.completionDate))
     const categories = useSelector(store => store.categories?.categories)
 
+    const sum = spendings.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0)
+
     const getSectionsFromSpendings = () => {
-        const sum = spendings.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0)
         const spendingsWithPercentage = spendings.map(spending => (
             {
                 ...spending,
@@ -38,7 +41,7 @@ const HomeStats = () => {
                 <Text style={styles.subWelcomeText}>Well done, your budget is on track</Text>
             </View>
             <View style={styles.statsContainer}>
-                <PieChart sections={sections} />
+                <PieChart sections={sections} sum={sum}/>
                 <SpendingList sections={sections} />
             </View>
         </Tab>

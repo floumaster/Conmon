@@ -16,6 +16,7 @@ import Categories from '../../Icons/Categories'
 import screenNames from '../../../constants/screenNames'
 import notificationFrequency from '../../../constants/notificationFrequency'
 import { addSpending } from '../../../reduxManager/spendingsSlice'
+import Tag from '../../Icons/Tag';
 
 const SpendingCreate = ({ navigation, route }) => {
 
@@ -84,7 +85,8 @@ const SpendingCreate = ({ navigation, route }) => {
             notificationDateStart: date,
             notificationTimeStart: time,
             isScheduled: true,
-            isCompleted: false
+            isCompleted: false,
+            creationDate: new Date()
         }))
         navigation.goBack()
     }
@@ -97,7 +99,8 @@ const SpendingCreate = ({ navigation, route }) => {
             comment: spendingComment,
             categoryId: categoryId,
             isScheduled: false,
-            isCompleted: false
+            isCompleted: false,
+            creationDate: new Date()
         }))
         navigation.goBack()
     }
@@ -113,7 +116,9 @@ const SpendingCreate = ({ navigation, route }) => {
             >
                 <View style={styles.partWrapper}>
                     <Text style={styles.partTitle}>Set name of spending</Text>
-                    <Input value={spendingTitle} setValue={setSpendingTitle} placeholder="Spending name"/>
+                    <Input value={spendingTitle} setValue={setSpendingTitle} placeholder="Spending name"
+                        Icon={() => <Tag fill={colors.white} width={20}/>}
+                    />
                 </View>
                 <View style={styles.partWrapper}>
                     <Text style={styles.partTitle}>Set amount of spending</Text>

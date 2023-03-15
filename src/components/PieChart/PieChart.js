@@ -9,7 +9,12 @@ const PIE_CHART_RADIUS = 110
 const PIE_CHART_INNER_RADIUS = 85
 const PIE_CHART_DIVIDER_SIZE = 1
 
-const PieChart = ({ sections }) => {
+const PieChart = ({ sections, sum }) => {
+
+    const proccessedSections = sections.length ? sections : [{
+        percentage: 100,
+        color: colors.textPrimary,
+    }]
 
     return (
         <View style={styles.chartContainer}>
@@ -18,13 +23,13 @@ const PieChart = ({ sections }) => {
                 innerRadius={PIE_CHART_INNER_RADIUS}
                 dividerSize={PIE_CHART_DIVIDER_SIZE}
                 backgroundColor={colors.primary}
-                sections={sections}
+                sections={proccessedSections}
                 strokeCap={'butt'}
                 />
                 <View style={styles.chartTextWrapper}>
                     <Text style={styles.chartText}>Budget spent</Text>
                     <Text style={styles.mainChartText}>
-                        $4,200
+                        ${sum}
                     </Text>
                     <Text style={styles.chartText}>of $5,000</Text>
                 </View>

@@ -4,19 +4,13 @@ import styles from "./Input.style";
 import Tag from "../Icons/Tag";
 import colors from "../../constants/colors";
 
-const Input = ({ styleWrapper, placeholderTextColor, setValue, value, placeholder, Icon }) => {
+const Input = ({ styleWrapper, placeholderTextColor, setValue, value, placeholder, Icon, inputWrapperStyle }) => {
 
     return (
-        <View style={styles.titleInputWrapper}>
-            <View style={styles.iconWrapper}>
-                {
-                    Icon ? (
-                        <Icon />
-                    ) : (
-                        <Tag fill={colors.white} width={20}/>
-                    )
-                }
-            </View>
+        <View style={[styles.titleInputWrapper, inputWrapperStyle]}>
+            {Icon && <View style={styles.iconWrapper}>
+                <Icon />
+            </View>}
             <TextInput
                 style={[styles.input, styleWrapper]}
                 onChangeText={setValue}

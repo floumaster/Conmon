@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useRef } from 'react'
 import { View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { useSelector } from 'react-redux'
 
@@ -6,21 +6,34 @@ import styles from './TasksList.style'
 import Tab from '../Tab'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import colors from '../../constants/colors'
-import Tax from '../Icons/Tax'
+import Filter from '../Icons/Filter'
 import Plus from '../Icons/Plus'
 import screenNames from '../../constants/screenNames'
 import iconMap from '../../utils/iconMap'
 import Done from '../Icons/Done'
 import Clock from '../Icons/Clock'
 import Input from '../Input'
+import Sort from '../Icons/Sort'
+import { sortSpendingsByCriteriaName } from '../../utils/sorting';
+import FilterModal from '../Modals/BottomSheets/FilterModal'
+import SortingModal from '../Modals/BottomSheets/SortingModal'
+import { filterSpendingsWithParams } from '../../utils/filtering'
 
-const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown }) => {
+const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown, searchedSpendingName }) => {
 
-    const processedSpendings = [0, ...spendings]
+    const searchedSpending = spendings.filter(spending => spending.name.startsWith(searchedSpendingName))
+
+    const processedSpendings = [0, ...searchedSpending]
 
     const navigateToCreateSpending = (isSpendingScheduled) => {
         navigation.navigate(screenNames.SpendingCreate, {
             isSpendingScheduled
+        })
+    }
+
+    const navigateToSpendingInfo = (spendingId) => {
+        navigation.navigate(screenNames.Spending, {
+            spendingId
         })
     }
 
@@ -41,7 +54,7 @@ const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown 
             <>
                 {
                     index ? (
-                        <View style={styles.spendingWrapper}>
+                        <TouchableOpacity style={styles.spendingWrapper} onPress={() => navigateToSpendingInfo(item.id)}>
                             <View style={styles.spendingTitleWrapper}>
                                 <Text style={styles.spendingTitle}>{item.name}</Text>
                                 <View style={[styles.markerWrapper, additionalMarkerWrapperStyle]}>
@@ -68,7 +81,7 @@ const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown 
                                     <Text style={styles.spendingStatsText}>{status}</Text>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     ) : (
                         <TouchableOpacity style={styles.spendingWrapperNew} onPress={() => navigateToCreateSpending(isPlannedSpendingsShown)}>
                             <Text style={styles.spendingTitle}>Add new spending</Text>
@@ -95,13 +108,32 @@ const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown 
 
 const TasksListWrapper = ({ navigation }) => {
 
-    const spendings = useSelector(store => store.spendings.spendings)
+    const [searchedSpendingName, setSearchedSpendingName] = useState('')
+    const [isCompletedShown, setIsCompletedShown] = useState(true)
+    const [isNotCompletedShown, setIsNotCompletedShown] = useState(true)
+    const [startDate, setStartDate] = useState(new Date((new Date).setMonth((new Date).getMonth()-1)))
+    const [endDate, setEndDate] = useState(new Date())
+    const [multiAmountValue, setMultiAmountValue] = React.useState([0, 5000]);
+
+    const filterSheetRef = useRef(null);
+    const sortingSheetRef = useRef(null);
+
+    const [sortingType, setSortingType] = useState(null)
+
+    const spendings = useSelector(store => store.spendings.spendings) || []
 
     const categories = useSelector(store => store.categories.categories)
 
-    const scheduledSpendings = spendings.filter(spending => spending.isScheduled)
+    const scheduledSpendings = sortSpendingsByCriteriaName(
+        filterSpendingsWithParams(spendings.filter(spending => spending.isScheduled),
+        isCompletedShown,
+        isNotCompletedShown,
+        startDate,
+        endDate,
+        multiAmountValue),
+        sortingType)
 
-    const unplannedSpendings = spendings.filter(spending => !spending.isScheduled)
+    const unplannedSpendings = sortSpendingsByCriteriaName(spendings.filter(spending => !spending.isScheduled), sortingType)
 
     const [isPlannedSpendingsShown, setIsPlannedSpendingsShown] = useState(true)
 
@@ -109,38 +141,80 @@ const TasksListWrapper = ({ navigation }) => {
 
     const showUnplannedSpendings = () => setIsPlannedSpendingsShown(false)
 
+    const openFilter = () => {
+        filterSheetRef.current.expand()
+    }
+
+    const openSorting = () => {
+        sortingSheetRef.current.expand()
+    }
+
     return (
-        <Tab style={{flex: 1}} headerTitle="Your spendings">
-            <View style={styles.header}>
-                <TouchableOpacity
-                    style={ isPlannedSpendingsShown ? styles.titleWrapperActive : styles.titleWrapper }
-                    onPress={showPlannedSpendings}
-                >
-                    <Text
-                        style={ isPlannedSpendingsShown ? styles.titleActive : styles.title }
+        <>
+            <Tab style={{flex: 1}} headerTitle="Your spendings">
+                <View style={styles.header}>
+                    <TouchableOpacity
+                        style={ isPlannedSpendingsShown ? styles.titleWrapperActive : styles.titleWrapper }
+                        onPress={showPlannedSpendings}
                     >
-                        Scheduled
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={ isPlannedSpendingsShown ? styles.titleWrapper : styles.titleWrapperActive }
-                    onPress={showUnplannedSpendings}
-                >
-                    <Text
-                        style={ isPlannedSpendingsShown ? styles.title : styles.titleActive }
+                        <Text
+                            style={ isPlannedSpendingsShown ? styles.titleActive : styles.title }
+                        >
+                            Scheduled
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={ isPlannedSpendingsShown ? styles.titleWrapper : styles.titleWrapperActive }
+                        onPress={showUnplannedSpendings}
                     >
-                        Unplanned
-                    </Text>
-                </TouchableOpacity>
-            </View>
-            <Input />
-            <TasksList
-                navigation={navigation}
-                spendings={isPlannedSpendingsShown ? scheduledSpendings : unplannedSpendings}
-                categories={categories}
-                isPlannedSpendingsShown={isPlannedSpendingsShown}
-            />
-        </Tab>
+                        <Text
+                            style={ isPlannedSpendingsShown ? styles.title : styles.titleActive }
+                        >
+                            Unplanned
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.sortBar}>
+                    <Input
+                        styleWrapper={styles.inputWrapper}
+                        inputWrapperStyle={styles.inputWrapperStyle}
+                        Icon={null}
+                        placeholder="Search"
+                        setValue={setSearchedSpendingName}
+                    />
+                    <TouchableOpacity style={styles.filterIconWrapper} onPress={openSorting}>
+                        <Sort fill={colors.white} width={30} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.filterIconWrapper} onPress={openFilter}>
+                        <Filter fill={colors.white} width={30} />
+                    </TouchableOpacity>
+                </View>
+                <TasksList
+                    navigation={navigation}
+                    spendings={isPlannedSpendingsShown ? scheduledSpendings : unplannedSpendings}
+                    categories={categories}
+                    isPlannedSpendingsShown={isPlannedSpendingsShown}
+                    searchedSpendingName={searchedSpendingName}
+                />
+                <FilterModal
+                    reference={filterSheetRef}
+                    isCompletedShown={isCompletedShown}
+                    setIsCompletedShown={setIsCompletedShown}
+                    isNotCompletedShown={isNotCompletedShown}
+                    setIsNotCompletedShown={setIsNotCompletedShown}
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                    endDate={endDate}
+                    setEndDate={setEndDate}
+                    multiAmountValue={multiAmountValue}
+                    setMultiAmountValue={setMultiAmountValue}
+                />
+                <SortingModal
+                    reference={sortingSheetRef}
+                    setSortingType={setSortingType}
+                />
+            </Tab>
+        </>
     )
 }
 
