@@ -5,6 +5,7 @@ export default {
     subText: '#757575',
     white: '#fff',
     whiteBlue: '#00e0ff',
+    whiteBlue2: '#99f4ff',
     green: '#00eb14',
     orange: '#e0a502',
     green: '#2dbd02'

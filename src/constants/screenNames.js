@@ -9,5 +9,6 @@ export default {
     Categories: 'Categories',
     CategoryCreate: 'CategoryCreate',
     Charts: 'Charts',
-    ColorPicker: 'ColorPicker'
+    ChartStack: 'ChartStack',
+    ColorPicker: 'ColorPicker',
 }

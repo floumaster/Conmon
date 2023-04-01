@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomTabBar from './CustomTabBar';
 
 import Home from '../../components/Screens/Home'
-import Charts from '../../components/Screens/Charts';
+import ChartNavigator from '../ChartNavigator';
 import CategoryNavigator from '../CategoryNavigator';
 import SpendingNavigator from '../SpendingNavigator';
 
@@ -60,8 +60,8 @@ export default function RootNavigator() {
               }}
             />
             <Tab.Screen
-              name={screenNames.Charts}
-              component={Charts}
+              name={screenNames.ChartStack}
+              component={ChartNavigator}
               options={({ route }) => {
                 return {
                   tabBarVisible: true,

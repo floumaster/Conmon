@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
     },
     chartWrapper: {
         width: '100%',
+        alignItems: 'center',
+    },
+    barChartWrapper: {
+        marginTop: 70,
+        width: '90%',
         alignItems: 'center'
     },
     periodTitleDisabled: {
@@ -51,6 +56,67 @@ const styles = StyleSheet.create({
     currentPeriodText: {
         color: colors.textPrimary,
         fontSize: 16,
+    },
+    spendingWrapper: {
+        borderColor: colors.textPrimary,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 7,
+        padding: 10,
+        width: '100%',
+        height: 120,
+        marginBottom: 30
+    },
+    spendingTitleWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    spendingTitle:{
+        color: colors.white,
+        fontWeight: 'bold',
+        fontSize: 12
+    },
+    markerWrapper: {
+        width: 20,
+        height: 20,
+        borderRadius: 50,
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    spendingDescription: {
+        color: colors.subText,
+        fontSize: 10,
+        marginTop: 5,
+        marginBottom: 10,
+        width: '100%'
+    },
+    spendingStatsWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 15
+    },
+    spendingStatsTextWrapper: {
+    },
+    spendingStatsValue: {
+        color: colors.whiteBlue,
+        fontWeight: 'bold',
+        fontSize: 12,
+    },
+    spendingStatsText: {
+        fontSize: 10,
+        color: colors.subText,
+        width: 60
+    },
+    done: {
+        backgroundColor: colors.green
+    },
+    notDone: {
+        backgroundColor: colors.orange
+    },
+    AxisTextStyle: {
+        color: colors.textPrimary
     }
 })
 

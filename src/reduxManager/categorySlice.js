@@ -6,25 +6,25 @@ const categorySlice = createSlice({
         categories: [
             {
                 name: 'Test category 1',
-                color: '#000',
+                color: '#99f4ff',
                 iconName: 'train',
                 id: 'dfsdfsdfsdf'
             },
             {
                 name: 'Test category 2',
-                color: '#000',
+                color: '#784db8',
                 iconName: 'car',
                 id: 'lksjfkjaflkewaf'
             },
             {
                 name: 'Test category 3',
-                color: '#000',
+                color: '#b0287e',
                 iconName: 'joystik',
                 id: 'dfgfdgdfg'
             },
             {
                 name: 'Test category 4',
-                color: '#000',
+                color: '#95cf32',
                 iconName: 'motorcycle',
                 id: 'wqeqwewqee'
             }
