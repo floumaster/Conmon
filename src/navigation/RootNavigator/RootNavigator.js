@@ -7,12 +7,14 @@ import Home from '../../components/Screens/Home'
 import ChartNavigator from '../ChartNavigator';
 import CategoryNavigator from '../CategoryNavigator';
 import SpendingNavigator from '../SpendingNavigator';
+import TemplatesNavigator from '../TemplatesNavigator';
 
 import screenNames from '../../constants/screenNames';
 import HomeIcon from '../../components/Icons/Home';
 import Chart from '../../components/Icons/Chart';
 import CategoriesIcon from '../../components/Icons/Categories';
 import Money from '../../components/Icons/Money';
+import Templates from '../../components/Icons/Templates';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,6 +47,17 @@ export default function RootNavigator() {
                   tabBarVisible: true,
                   tabBarIcon: Money,
                   title: "Finances"
+                }
+              }}
+            />
+            <Tab.Screen
+              name={screenNames.TemplatesStack}
+              component={TemplatesNavigator}
+              options={({ route }) => {
+                return {
+                  tabBarVisible: true,
+                  tabBarIcon: Templates,
+                  title: "Templates"
                 }
               }}
             />

@@ -55,7 +55,7 @@ const FilterModal = ({
     return (
         <BottomSheet
             ref={reference}
-            index={1}
+            index={-1}
             snapPoints={snapPoints}
             backgroundStyle={styles.filterBackground}
             handleIndicatorStyle={styles.handleStyle}

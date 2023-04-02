@@ -11,4 +11,9 @@ export default {
     Charts: 'Charts',
     ChartStack: 'ChartStack',
     ColorPicker: 'ColorPicker',
+    Templates: 'Templates',
+    TemplatesStack: 'TemplatesStack',
+    TemplateCreate: 'TemplateCreate',
+    SpendingSelection: 'SpendingSelecton',
+    TemplateViewer: 'TemplateViewer'
 }

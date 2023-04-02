@@ -1,110 +1,18 @@
-import React, { useState, useMemo, useRef } from 'react'
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import React, { useState, useRef } from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import styles from './TasksList.style'
 import Tab from '../Tab'
-import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import colors from '../../constants/colors'
 import Filter from '../Icons/Filter'
-import Plus from '../Icons/Plus'
-import screenNames from '../../constants/screenNames'
-import iconMap from '../../utils/iconMap'
-import Done from '../Icons/Done'
-import Clock from '../Icons/Clock'
 import Input from '../Input'
 import Sort from '../Icons/Sort'
 import { sortSpendingsByCriteriaName } from '../../utils/sorting';
 import FilterModal from '../Modals/BottomSheets/FilterModal'
 import SortingModal from '../Modals/BottomSheets/SortingModal'
 import { filterSpendingsWithParams } from '../../utils/filtering'
-
-const TasksList = ({ navigation, spendings, categories, isPlannedSpendingsShown, searchedSpendingName }) => {
-
-    const searchedSpending = spendings.filter(spending => spending.name.startsWith(searchedSpendingName))
-
-    const processedSpendings = [0, ...searchedSpending]
-
-    const navigateToCreateSpending = (isSpendingScheduled) => {
-        navigation.navigate(screenNames.SpendingCreate, {
-            isSpendingScheduled
-        })
-    }
-
-    const navigateToSpendingInfo = (spendingId) => {
-        navigation.navigate(screenNames.Spending, {
-            spendingId
-        })
-    }
-
-    const renderSpendingListItem = ({ item, index }) => {
-        const comment = item.comment || ''
-
-        const processedComment = comment.length > 20 ? `${comment.slice(0, 20)}...` : comment
-
-        const status = item.isCompleted ? 'Completed' : 'Waiting to complete'
-
-        const Icon = iconMap[categories.find(cat => cat.id === item.categoryId)?.iconName]
-
-        const additionalMarkerWrapperStyle = item.isCompleted ? styles.done : styles.notDone
-
-        const Statusicon = item.isCompleted ? Done : Clock
-
-        return (
-            <>
-                {
-                    index ? (
-                        <TouchableOpacity style={styles.spendingWrapper} onPress={() => navigateToSpendingInfo(item.id)}>
-                            <View style={styles.spendingTitleWrapper}>
-                                <Text style={styles.spendingTitle}>{item.name}</Text>
-                                <View style={[styles.markerWrapper, additionalMarkerWrapperStyle]}>
-                                    <Statusicon width={18} fill={colors.white}/>
-                                </View>
-                            </View>
-                            <Text style={styles.spendingDescription}>{processedComment}</Text>
-                            <View style={styles.spendingStatsWrapper}>
-                                <AnimatedCircularProgress
-                                    size={50}
-                                    width={3}
-                                    fill={100}
-                                    prefill={50}
-                                    tintColor={colors.whiteBlue}
-                                    onAnimationComplete={() => console.log('onAnimationComplete')}
-                                    backgroundColor="#3d5875"
-                                >
-                                    {
-                                        () => <Icon width={26} height={26} fill={colors.white}/>
-                                    }
-                                </AnimatedCircularProgress>
-                                <View style={styles.spendingStatsTextWrapper}>
-                                    <Text style={styles.spendingStatsValue}>${item.amount}</Text>
-                                    <Text style={styles.spendingStatsText}>{status}</Text>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity style={styles.spendingWrapperNew} onPress={() => navigateToCreateSpending(isPlannedSpendingsShown)}>
-                            <Text style={styles.spendingTitle}>Add new spending</Text>
-                            <View style={styles.newSpendingButtonWrapper}>
-                                <Plus fill={colors.white}/>
-                            </View>
-                        </TouchableOpacity>
-                    )
-                }
-            </>
-        )
-    }
-
-    return (
-        <FlatList style={styles.spendingList}
-            data={processedSpendings}
-            renderItem={renderSpendingListItem}
-            numColumns={2}
-            columnWrapperStyle={styles.listColumnWrapper}
-            contentContainerStyle={styles.listContentContainer}
-        />
-    )
-}
+import SpendingsList from '../SpendingsList'
 
 const TasksListWrapper = ({ navigation }) => {
 
@@ -189,7 +97,7 @@ const TasksListWrapper = ({ navigation }) => {
                         <Filter fill={colors.white} width={30} />
                     </TouchableOpacity>
                 </View>
-                <TasksList
+                <SpendingsList
                     navigation={navigation}
                     spendings={isPlannedSpendingsShown ? scheduledSpendings : unplannedSpendings}
                     categories={categories}
