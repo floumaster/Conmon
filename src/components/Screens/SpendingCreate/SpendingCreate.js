@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 import { useDispatch } from 'react-redux'
-import { v4 as uuid } from 'uuid';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 import Tab from '../../Tab'
 import styles from './SpendingCreate.style'
@@ -76,7 +77,7 @@ const SpendingCreate = ({ navigation, route }) => {
 
     const createNewScheduledSpending = () => {
         dispatch(addSpending({
-            id: uuid(),
+            id: uuidv4(),
             name: spendingTitle,
             amount: spendingAmount,
             comment: spendingComment,
@@ -93,7 +94,7 @@ const SpendingCreate = ({ navigation, route }) => {
 
     const createNewUnplannedSpending = () => {
         dispatch(addSpending({
-            id: uuid(),
+            id: uuidv4(),
             name: spendingTitle,
             amount: spendingAmount,
             comment: spendingComment,
@@ -125,7 +126,7 @@ const SpendingCreate = ({ navigation, route }) => {
                     <Input
                         keyboardType='numeric'
                         value={spendingAmount}
-                        setValue={setSpendingAmount}
+                        setValue={(val) => setSpendingAmount(parseInt(val))}
                         placeholder="Spending amount"
                         Icon={() => <Money fill={colors.textPrimary} width={18}/>}
                     />

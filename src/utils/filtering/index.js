@@ -11,7 +11,6 @@ export const filterSpendingsWithParams = (
             return !spending.isCompleted
         return spending
     })
-    console.log(filterByCompletion)
     const filterByNotCompletion = filterByCompletion.filter(spending => {
         if(!isNotCompletedShown)
             return spending.isCompleted
