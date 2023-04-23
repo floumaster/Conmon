@@ -93,4 +93,17 @@ export default StyleSheet.create({
     listContentContainer: {
         rowGap: 12
     },
+    spendingsWrapper: {
+        borderWidth: 2,
+        borderColor: colors.subText,
+        borderRadius: 10,
+        padding: 10,
+        height: '100%',
+        marginBottom: 16
+    },
+    spendingsRowWrapper: {
+        flexDirection: 'row',
+        columnGap: 10,
+        marginBottom: 10
+    }
 })

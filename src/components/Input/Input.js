@@ -4,7 +4,7 @@ import styles from "./Input.style";
 import Tag from "../Icons/Tag";
 import colors from "../../constants/colors";
 
-const Input = ({ styleWrapper, placeholderTextColor, setValue, value, placeholder, Icon, inputWrapperStyle }) => {
+const Input = ({ styleWrapper, placeholderTextColor, setValue, value, placeholder, Icon, inputWrapperStyle, keyboardType }) => {
 
     return (
         <View style={[styles.titleInputWrapper, inputWrapperStyle]}>
@@ -17,6 +17,7 @@ const Input = ({ styleWrapper, placeholderTextColor, setValue, value, placeholde
                 value={value}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor || colors.subText}
+                keyboardType={keyboardType}
             />
         </View>
     )

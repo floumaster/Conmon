@@ -113,18 +113,16 @@ const SpendingCreate = ({ navigation, route }) => {
                 headerTitle={isSpendingScheduled ? "Create a new scheduled spending" : "Create a new unplanned spending"}
                 style={{flex: 1}}
                 HeaderIconLeft={() => <BackArrow width={20} fill={colors.white} onPress={navigation.goBack} />}
-                isScrollable
+                isScrollable={true}
             >
                 <View style={styles.partWrapper}>
-                    <Text style={styles.partTitle}>Set name of spending</Text>
                     <Input value={spendingTitle} setValue={setSpendingTitle} placeholder="Spending name"
                         Icon={() => <Tag fill={colors.white} width={20}/>}
                     />
                 </View>
                 <View style={styles.partWrapper}>
-                    <Text style={styles.partTitle}>Set amount of spending</Text>
                     <Input
-                        keyboardType='numeric'
+                        keyboardType="numeric"
                         value={spendingAmount}
                         setValue={(val) => setSpendingAmount(parseInt(val))}
                         placeholder="Spending amount"
@@ -132,7 +130,6 @@ const SpendingCreate = ({ navigation, route }) => {
                     />
                 </View>
                 <View style={styles.partWrapper}>
-                    <Text style={styles.partTitle}>Set comment of spending</Text>
                     <Input
                         value={spendingComment}
                         setValue={setSpendingComment}

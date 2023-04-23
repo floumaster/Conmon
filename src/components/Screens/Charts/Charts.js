@@ -20,6 +20,8 @@ const barChartLength = Dimensions.get('window').width * 0.8
 
 const SpengingItem = ({ item, categories, navigation }) => {
 
+    const userInfo = useSelector(store => store.userSlice.user)
+
     const navigateToSpendingInfo = (spendingId) => {
         navigation.navigate(screenNames.Spending, {
             spendingId
@@ -54,7 +56,6 @@ const SpengingItem = ({ item, categories, navigation }) => {
                     fill={100}
                     prefill={50}
                     tintColor={colors.whiteBlue}
-                    onAnimationComplete={() => console.log('onAnimationComplete')}
                     backgroundColor="#3d5875"
                 >
                     {
@@ -62,7 +63,7 @@ const SpengingItem = ({ item, categories, navigation }) => {
                     }
                 </AnimatedCircularProgress>
                 <View style={styles.spendingStatsTextWrapper}>
-                    <Text style={styles.spendingStatsValue}>${item.amount}</Text>
+                    <Text style={styles.spendingStatsValue}>{userInfo?.currency}{item.amount}</Text>
                     <Text style={styles.spendingStatsText}>{status}</Text>
                 </View>
             </View>
@@ -81,7 +82,6 @@ const CustomLabel = (item, categories) => {
             fill={100}
             prefill={50}
             tintColor={colors.whiteBlue}
-            onAnimationComplete={() => console.log('onAnimationComplete')}
             backgroundColor="#3d5875"
             >
                 {

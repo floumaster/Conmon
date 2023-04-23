@@ -15,5 +15,10 @@ export default {
     TemplatesStack: 'TemplatesStack',
     TemplateCreate: 'TemplateCreate',
     SpendingSelection: 'SpendingSelecton',
-    TemplateViewer: 'TemplateViewer'
+    TemplateViewer: 'TemplateViewer',
+    Login: 'Login',
+    HomeStack: 'HomeStack',
+    Register: 'Register',
+    RootNavigator: 'RootNavigator',
+    Account: 'Account',
 }

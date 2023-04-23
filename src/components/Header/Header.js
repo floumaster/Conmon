@@ -6,11 +6,19 @@ import styles from './Header.style'
 import Tab from '../Tab';
 import Cap from '../Icons/Cap';
 import Settings from '../Icons/Settings';
-import Bell from '../Icons/Bell';
+import { useSelector } from 'react-redux';
+import screenNames from '../../constants/screenNames';
 
 
 
-const Header = () => {
+const Header = ({ navigation }) => {
+
+    const userInfo = useSelector(store => store.userSlice.user)
+
+    const handleAccountOpen = () => {
+        navigation.navigate(screenNames.Account)
+    }
+
     return (
         <Tab>
             <View style={styles.contentWrapper}>
@@ -18,8 +26,7 @@ const Header = () => {
                     <Text style={styles.name}>Conmon</Text>
                 </View>
                 <View style={styles.iconsWrapper}>
-                    <Bell width={20} onPress={() => {}}/>
-                    <Settings width={20} onPress={() => {}}/>
+                    <Settings width={20} onPress={handleAccountOpen}/>
                 </View>
             </View>
             <View style={styles.profileWrapper}>
@@ -29,7 +36,6 @@ const Header = () => {
                     fill={100}
                     prefill={50}
                     tintColor="#00e0ff"
-                    onAnimationComplete={() => console.log('onAnimationComplete')}
                     backgroundColor="#3d5875"
                 >
                     {
@@ -37,7 +43,7 @@ const Header = () => {
                     }
                 </AnimatedCircularProgress>
                 <View style={styles.profileInfoWrapper}>
-                    <Text style={styles.profileName}>Welcome back, Nikola Covac</Text>
+                    <Text style={styles.profileName}>Welcome back, {userInfo?.name} {userInfo?.surname}</Text>
                     <Text style={styles.profileProgress}>Control your money</Text>
                 </View>
             </View>

@@ -14,6 +14,8 @@ import { completeSpending } from '../../../reduxManager/spendingsSlice';
 
 const Spending = ({ navigation, route }) => {
 
+    const userInfo = useSelector(store => store.userSlice.user)
+
     const dispatch = useDispatch()
 
     const spendingiD = route.params.spendingId
@@ -57,7 +59,7 @@ const Spending = ({ navigation, route }) => {
                             <Money fill={colors.textPrimary} width={18}/>
                         </View>
                         <View style={styles.wrapperLikeInput}>
-                            <Text style={styles.partValue}>${spending.amount}</Text>
+                            <Text style={styles.partValue}>{userInfo?.currency}{spending.amount}</Text>
                         </View>
                     </View>
                 </View>

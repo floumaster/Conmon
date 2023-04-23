@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 
@@ -14,7 +14,7 @@ import SortingModal from '../Modals/BottomSheets/SortingModal'
 import { filterSpendingsWithParams } from '../../utils/filtering'
 import SpendingsList from '../SpendingsList'
 
-const TasksListWrapper = ({ navigation }) => {
+const TasksListWrapper = ({ navigation, isCoreScreen }) => {
 
     const [searchedSpendingName, setSearchedSpendingName] = useState('')
     const [isCompletedShown, setIsCompletedShown] = useState(true)
@@ -40,6 +40,12 @@ const TasksListWrapper = ({ navigation }) => {
         endDate,
         multiAmountValue),
         sortingType)
+    console.log(spendings, filterSpendingsWithParams(spendings.filter(spending => spending.isScheduled),
+    isCompletedShown,
+    isNotCompletedShown,
+    startDate,
+    endDate,
+    multiAmountValue))
 
     const unplannedSpendings = sortSpendingsByCriteriaName(spendings.filter(spending => !spending.isScheduled), sortingType)
 
@@ -103,6 +109,7 @@ const TasksListWrapper = ({ navigation }) => {
                     categories={categories}
                     isPlannedSpendingsShown={isPlannedSpendingsShown}
                     searchedSpendingName={searchedSpendingName}
+                    isCoreScreen={isCoreScreen}
                 />
                 <FilterModal
                     reference={filterSheetRef}

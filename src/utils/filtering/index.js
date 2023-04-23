@@ -1,3 +1,5 @@
+import moment from "moment"
+
 export const filterSpendingsWithParams = (
     spendings,
     isCompletedShown,
@@ -17,7 +19,7 @@ export const filterSpendingsWithParams = (
         return spending
     })
     const filterByDate = filterByNotCompletion.filter(spending => {
-        return dateFrom <= spending.creationDate && spending.creationDate <= dateTo
+        return moment(dateFrom) <= moment(spending.creationDate) && moment(spending.creationDate) <= moment(dateTo)
     })
     const filterByAmount = filterByDate.filter(spending => {
         return multiAmountValue[0] <= spending.amount && spending.amount <= multiAmountValue[1]

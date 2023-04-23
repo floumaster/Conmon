@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         rowGap: 12
     },
     category: {
-        width: 102,
-        height: 102,
+        width: 95,
+        height: 95,
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: colors.textPrimary,

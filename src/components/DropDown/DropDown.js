@@ -5,7 +5,7 @@ import ArrowDown from "../Icons/ArrowDown";
 import colors from "../../constants/colors";
 import styles from "./DropDown.style";
 
-const DropDown = ({ value, setValue, placeholder }) => {
+const DropDown = ({ value, setValue, placeholder, dropdownStyles }) => {
     return (
         <SelectList 
             setSelected={(val) => setValue(val)} 
@@ -37,7 +37,7 @@ const DropDown = ({ value, setValue, placeholder }) => {
                 />}
             boxStyles={styles.box}
             inputStyles={styles.boxText}
-            dropdownStyles={styles.dropDown}
+            dropdownStyles={[styles.dropDown, dropdownStyles]}
             dropdownItemStyles={styles.dropDownItem}
             dropdownTextStyles={styles.dropDownItemText}
         />

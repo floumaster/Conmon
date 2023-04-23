@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "33225118245",
+    "project_id": "conmon-361416",
+    "storage_bucket": "conmon-361416.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33225118245:android:6ad866e57956c269cc65cc",
+        "android_client_info": {
+          "package_name": "com.conmon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33225118245-tdvtpvo1c1ettb19sjkhss4dqv79lktc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzxxM2vHEpiyN5RDO47eDiev--tz8k1DI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33225118245-tdvtpvo1c1ettb19sjkhss4dqv79lktc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "33225118245-rma2dppgcdfc3rfgf9uv0sc1n9j80imp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Conmon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

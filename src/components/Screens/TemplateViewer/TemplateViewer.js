@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useId } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuid } from 'uuid';
 
@@ -11,8 +11,14 @@ import BackArrow from '../../Icons/BackArrow'
 import colors from '../../../constants/colors'
 import Tag from '../../Icons/Tag'
 import Categories from '../../Icons/Categories'
-import SpendingsList from '../../SpendingsList'
+import iconMap from '../../../utils/iconMap/iconMap';
 import PrimaryButton from '../../Buttons/PrimaryButton'
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import Clock from '../../Icons/Clock';
+import screenNames from '../../../constants/screenNames';
+import moment from 'moment';
+import { addSpending } from '../../../reduxManager/spendingsSlice';
+
 
 const TemplateViewer = ({ navigation, route }) => {
     const { templateId } = route.params
@@ -27,14 +33,46 @@ const TemplateViewer = ({ navigation, route }) => {
 
     const categories = useSelector(store => store.categories.categories)
     const spendings = useSelector(store => store.spendings.spendings)
+    const userInfo = useSelector(store => store.userSlice.user)
     const chosenSpendings = spendings.filter(spending => spendingsId.includes(spending.id))
+    const processedSpendings = []
+    let bufArr = []
+    chosenSpendings.forEach(spending => {
+        bufArr.push(spending)
+        if(bufArr.length === 2){
+            processedSpendings.push(bufArr)
+            bufArr = []
+        }
+    });
 
     const isButtonDisbled = template.isAplied
 
+    useEffect(() => {
+        console.log(spendings)
+    }, [spendings])
+
     const templateCreate = () => {
+        chosenSpendings.forEach(spending => {
+            dispatch(addSpending(
+                {
+                    ...spending,
+                    completionDate: null,
+                    creationDate: moment().toDate(),
+                    id: uuid(),
+                    isCompleted: false,
+                    isScheduled: true,
+                }
+            ))
+        })
         dispatch(applyTemplate({
             id: template.id
         }))
+    }
+
+    const handleNavigateToSpendingInfo = (id) => {
+        navigation.navigate(screenNames.Spending, {
+            spendingId: id,
+        })
     }
 
     return (
@@ -43,7 +81,6 @@ const TemplateViewer = ({ navigation, route }) => {
                 headerTitle={templateName}
                 style={{flex: 1}}
                 HeaderIconLeft={() => <BackArrow width={20} fill={colors.white} onPress={navigation.goBack} />}
-                isScrollable
             >
                 <View style={styles.partWrapper}>
                     <Text style={styles.partTitle}>Template name</Text>
@@ -78,16 +115,54 @@ const TemplateViewer = ({ navigation, route }) => {
                         </View>
                     </View>
                 </View>
-                <View style={styles.spendingsWrapper}>
-                    <SpendingsList
-                        navigation={navigation}
-                        spendings={chosenSpendings}
-                        categories={categories}
-                        isPlannedSpendingsShown={true}
-                        searchedSpendingName=""
-                        isTemplateViewer
-                    />
-                </View>
+                <ScrollView style={styles.spendingsWrapper}>
+                    {
+                        processedSpendings.map(spendingPair => {
+                            
+                            return (
+                                <View style={styles.spendingsRowWrapper}>
+                                    {
+                                        spendingPair.map(spending => {
+                                            const comment = spending.comment || ''
+                                            const processedComment = comment.length > 20 ? `${comment.slice(0, 15)}...` : comment
+                                            const Icon = iconMap[categories.find(cat => cat.id === spending.categoryId)?.iconName]
+                                            const status = spending.isCompleted ? 'Completed' : 'Waiting to complete'
+                                            return (
+                                                <TouchableOpacity style={styles.spendingWrapper} onPress={() => handleNavigateToSpendingInfo(spending.id)}>
+                                                    <View style={styles.spendingTitleWrapper}>
+                                                        <Text style={styles.spendingTitle}>{spending.name}</Text>
+                                                        <View style={[styles.markerWrapper, styles.notDone]}>
+                                                            <Clock width={18} fill={colors.white} />
+                                                        </View>
+                                                    </View>
+                                                    <Text style={styles.spendingDescription}>{processedComment}</Text>
+                                                    <View style={styles.spendingStatsWrapper}>
+                                                        <AnimatedCircularProgress
+                                                            size={50}
+                                                            width={3}
+                                                            fill={100}
+                                                            prefill={50}
+                                                            tintColor={colors.whiteBlue}
+                                                            backgroundColor="#3d5875"
+                                                        >
+                                                            {
+                                                                () => <Icon width={26} height={26} fill={colors.white}/>
+                                                            }
+                                                        </AnimatedCircularProgress>
+                                                        <View style={styles.spendingStatsTextWrapper}>
+                                                            <Text style={styles.spendingStatsValue}>{userInfo?.currency}{spending.amount}</Text>
+                                                            <Text style={styles.spendingStatsText}>{status}</Text>
+                                                        </View>
+                                                    </View>
+                                                </TouchableOpacity>
+                                            )
+                                        })
+                                    }
+                                </View>
+                            )
+                        })
+                    }
+                </ScrollView>
                 <PrimaryButton text="Apply template" disabled={isButtonDisbled} onPress={templateCreate}/>
             </Tab>
         </View>

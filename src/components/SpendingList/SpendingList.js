@@ -3,8 +3,11 @@ import { View, Text, ScrollView } from 'react-native'
 import styles from './SpendingList.style'
 import Settings from '../Icons/Settings'
 import colors from '../../constants/colors'
+import { useSelector } from 'react-redux'
 
 const SpendingList = ({ sections }) => {
+
+    const userInfo = useSelector(store => store.userSlice.user)
     
     return (
         <View style={styles.spendingList}>
@@ -24,7 +27,7 @@ const SpendingList = ({ sections }) => {
                                 </View>
                                 <View style={styles.spendingItemValueWrapper}>
                                     <Text style={styles.spendingItemPercent}>{section.percentage}%</Text>
-                                    <Text style={styles.spendingItemValue}>{section.amount}$</Text>
+                                    <Text style={styles.spendingItemValue}>{section.amount}{userInfo?.currency}</Text>
                                 </View>
                             </View>
                         )

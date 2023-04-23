@@ -4,6 +4,7 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import DropDown from '../../DropDown';
 import styles from './BottomSheet.style';
 import sortingTypes from '../../../constants/sortingTypes';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const SortingModal = ({reference, setSortingType}) => {
     const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);

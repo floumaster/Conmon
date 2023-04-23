@@ -7,10 +7,10 @@ import HomeStats from '../../HomeStats'
 import Header from '../../Header'
 import TasksList from '../../TasksList'
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return (
         <View style={styles.screenContainer}>
-            <Header />
+            <Header navigation={navigation}/>
             <HomeStats />
             {/* <TasksList /> */}
         </View>

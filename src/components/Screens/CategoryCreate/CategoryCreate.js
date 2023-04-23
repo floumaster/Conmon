@@ -76,6 +76,7 @@ const CategoryCreate = ({ navigation, route }) => {
             <Tab
                 headerTitle={categoryInfo ? "Edit the category" : "Create a new category"}
                 style={{flex: 1}}
+                isScrollable={true}
                 HeaderIconLeft={() => <BackArrow width={20} fill={colors.white} onPress={navigation.goBack} />}
             >
                 <View style={styles.titleInputWrapper}>
