@@ -16,6 +16,7 @@ const SpendingList = ({ sections }) => {
             > 
                 {
                     sections.map(section => {
+                        const formatedname = section.name.length > 8 ? `${section.name.slice(0, 8)}...` : section.name
                         const Icon = section.Icon
                         return (
                             <View style={styles.spendingItem}>
@@ -23,7 +24,7 @@ const SpendingList = ({ sections }) => {
                                     <View style={[styles.spendingItemMark, {backgroundColor: section.color}]}>
                                         <Icon width={25} fill={colors.white}/>
                                     </View>
-                                    <Text style={styles.spendingItemTitle}>{section.name}</Text>
+                                    <Text style={styles.spendingItemTitle}>{formatedname}</Text>
                                 </View>
                                 <View style={styles.spendingItemValueWrapper}>
                                     <Text style={styles.spendingItemPercent}>{section.percentage}%</Text>

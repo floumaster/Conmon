@@ -1,5 +1,4 @@
 export default [
-    {key:'1', value:'Once a day'},
     {key:'2', value:'Every day'},
     {key:'3', value:'Every week'},
     {key:'5', value:'Every two weeks'},

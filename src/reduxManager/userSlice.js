@@ -1,15 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { API_ROOT } from '../constants/links'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+export const login = createAsyncThunk('user/login', async function(data) {
+    const response = await fetch(`${API_ROOT}/auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    const parsedResponse = await response.json()
+    return parsedResponse
+})
+
+export const register = createAsyncThunk('user/login', async function(data) {
+    const response = await fetch(`${API_ROOT}/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    const parsedResponse = await response.json()
+    return parsedResponse
+})
 
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user: {
-            id: 'skidfjkldjskfl',
-            name: 'Nicola',
-            surname: 'Covac',
-            monthBudget: 5000,
-            currency: '$'
-        }
+        user: null,
+        error: null
     },
     reducers: {
         deleteUser(state, action) {
@@ -28,6 +49,30 @@ const userSlice = createSlice({
             state.user = {
                 ...state.user,
                 monthBudget: action.payload
+            }
+        }
+    },
+    extraReducers: {
+        [login.fulfilled]: (state, action) => {
+            if(action.payload.error){
+                state.user = null
+                state.error = action.payload.error
+            }
+            else{
+                state.user = action.payload
+                state.error = null
+                AsyncStorage.setItem('userInfo', JSON.stringify(action.payload))
+            }
+        },
+        [register.fulfilled]: (state, action) => {
+            if(action.payload.error){
+                state.user = null
+                state.error = action.payload.error
+            }
+            else{
+                state.user = action.payload
+                state.error = null
+                AsyncStorage.setItem('userInfo', JSON.stringify(action.payload))
             }
         },
     }

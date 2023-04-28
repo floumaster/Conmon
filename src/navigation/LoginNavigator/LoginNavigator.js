@@ -5,7 +5,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import RootNavigator from '../RootNavigator/RootNavigator'
 import Login from '../../components/Screens/Login'
 import Register from '../../components/Screens/Register'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setUser } from '../../reduxManager/userSlice'
 
 import screenNames from '../../constants/screenNames'
 
@@ -14,14 +16,26 @@ const Stack = createNativeStackNavigator()
 const LoginNavigator = (props) => {
 
     const navigationRef = useRef(null)
+    const dispatch = useDispatch()
     
     const userInfo = useSelector(store => store.userSlice.user)
+
+    const autoLogin = async () => {
+        console.log('here')
+        const userJSON = await AsyncStorage.getItem('userInfo')
+        const user = JSON.parse(userJSON)
+        if(!userInfo && user)
+            dispatch(setUser(user))
+        else
+            navigationRef.current?.navigate(screenNames.Login)
+    }
 
     useEffect(() => {
         if(userInfo)
             navigationRef.current?.navigate(screenNames.RootNavigator)
-        else
-            navigationRef.current?.navigate(screenNames.Login)
+        else{
+            autoLogin() 
+        }
     }, [userInfo])
 
     return (

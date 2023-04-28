@@ -16,18 +16,21 @@ const HomeStats = () => {
     .filter(spending => spending.isCompleted && moment().startOf('month') < moment(spending.completionDate))
     const categories = useSelector(store => store.categories?.categories)
 
-    const sum = spendings.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0)
+    const sum = spendings.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.amount), 0)
 
     const getSectionsFromSpendings = () => {
-        const spendingsWithPercentage = spendings.map(spending => (
-            {
-                ...spending,
-                percentage: Math.round(((spending.amount * 100) / sum) * 10) / 10,
-                color: categories.find(cat => cat.id === spending.categoryId).color,
-                Icon: iconMap[categories.find(cat => cat.id === spending.categoryId).iconName]
-            }
-        ))
-        return spendingsWithPercentage
+        if(categories?.length){
+            const spendingsWithPercentage = spendings.map(spending => (
+                {
+                    ...spending,
+                    percentage: Math.round(((spending.amount * 100) / sum) * 10) / 10,
+                    color: categories.find(cat => cat.id === spending.categoryId)?.color,
+                    Icon: iconMap[categories.find(cat => cat.id === spending.categoryId).iconName]
+                }
+            ))
+            return spendingsWithPercentage
+        }
+        return []
     }
 
     const sections = getSectionsFromSpendings()

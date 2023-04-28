@@ -44,12 +44,11 @@ const TemplateViewer = ({ navigation, route }) => {
             bufArr = []
         }
     });
-
+    if(bufArr.length === 1){
+        processedSpendings.push(bufArr)
+        bufArr = []
+    }
     const isButtonDisbled = template.isAplied
-
-    useEffect(() => {
-        console.log(spendings)
-    }, [spendings])
 
     const templateCreate = () => {
         chosenSpendings.forEach(spending => {

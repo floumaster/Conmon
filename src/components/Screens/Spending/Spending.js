@@ -26,8 +26,7 @@ const Spending = ({ navigation, route }) => {
 
     const onSubmit = () => {
         dispatch(completeSpending({
-            id: spendingiD,
-            completionDate: new Date()
+            spendingId: spendingiD,
         }))
         navigation.goBack()
     }

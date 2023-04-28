@@ -40,12 +40,6 @@ const TasksListWrapper = ({ navigation, isCoreScreen }) => {
         endDate,
         multiAmountValue),
         sortingType)
-    console.log(spendings, filterSpendingsWithParams(spendings.filter(spending => spending.isScheduled),
-    isCompletedShown,
-    isNotCompletedShown,
-    startDate,
-    endDate,
-    multiAmountValue))
 
     const unplannedSpendings = sortSpendingsByCriteriaName(spendings.filter(spending => !spending.isScheduled), sortingType)
 

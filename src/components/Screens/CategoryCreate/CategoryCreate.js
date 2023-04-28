@@ -11,7 +11,7 @@ import screenNames from '../../../constants/screenNames'
 import Tag from '../../Icons/Tag'
 import PrimaryButton from '../../Buttons/PrimaryButton'
 import iconMap from '../../../utils/iconMap'
-import { addCategory, editCategory } from '../../../reduxManager/categorySlice'
+import { editCategory, createCategory } from '../../../reduxManager/categorySlice'
 
 const renderIcon = ({item, index}, chosenIconName, setChosenIconName, categoryColor) => {
     const Icon = iconMap[item]
@@ -34,6 +34,7 @@ const CategoryCreate = ({ navigation, route }) => {
 
     const categoryInfo = route?.params?.categoryInfo
     const categoryList = useSelector(store => store.categories.categories)
+    const userInfo = useSelector(store => store.userSlice.user)
     const categoryLastId = categoryList?.[categoryList.length - 1]?.id || 0
 
     useEffect(() => {
@@ -52,11 +53,12 @@ const CategoryCreate = ({ navigation, route }) => {
     }
 
     const createNewCategory = () => {
-        dispatch(addCategory({
+        dispatch(createCategory({
             id: uuid(),
             name: categoryTitle,
             color: categoryColor,
-            iconName: chosenIconName
+            iconName: chosenIconName,
+            user_id: userInfo.id
         }))
         navigation.goBack()
     }
@@ -66,7 +68,8 @@ const CategoryCreate = ({ navigation, route }) => {
             ...categoryInfo,
             name: categoryTitle,
             color: categoryColor,
-            iconName: chosenIconName
+            iconName: chosenIconName,
+            user_id: userInfo.id
         }))
         navigation.goBack()
     }

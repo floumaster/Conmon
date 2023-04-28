@@ -140,7 +140,7 @@ const Charts = ({ navigation }) => {
     const formatedSpendings = [...spendingsFilteredByDate].map(spending => (
         {
             ...spending,
-            value: spending.amount,
+            value: parseInt(spending.amount),
             color: categories.find(category => category.id === spending.categoryId).color,
             topLabelComponent: () => CustomLabel(spending, categories),
             text: spending.name,
@@ -292,7 +292,7 @@ const Charts = ({ navigation }) => {
                                 navigation={navigation}
                             />
                         }
-                        <View style={{left: 20}}>
+                        {/* <View style={{left: 20}}>
                             <PieChart
                                 data={formatedSpendings}
                                 innerRadius={70}
@@ -309,7 +309,7 @@ const Charts = ({ navigation }) => {
                                 showGradient
                                 labelsPosition='outward'
                             />
-                        </View>
+                        </View> */}
                         {
                             selectedSpendingDonut &&
                             <SpengingItem

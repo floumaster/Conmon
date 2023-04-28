@@ -13,10 +13,12 @@ import moment from "moment";
 import { deleteUser, setBudget, setCurrency } from "../../../reduxManager/userSlice";
 import Logout from "../../Icons/Logout";
 import PrimaryButton from "../../Buttons/PrimaryButton/PrimaryButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Account = ({ navigation }) => {
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        await AsyncStorage.removeItem('userInfo')
         dispatch(deleteUser())
     }
 

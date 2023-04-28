@@ -1,12 +1,14 @@
 import { StyleSheet } from 'react-native'
+import { Dimensions } from 'react-native'
 import colors from '../../../constants/colors'
 
 export default StyleSheet.create({
     container: {
         backgroundColor: colors.primary,
-        flex: 1,
         padding: 10,
-        rowGap: 15
+        rowGap: 15,
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width
     },
     logoWrapper: {
         width: '100%',
@@ -21,13 +23,15 @@ export default StyleSheet.create({
         color: colors.textPrimary
     },
     form: {
+        top: -20,
         width: '100%',
-        height: '50%',
-        alignItems: 'center',
-        paddingHorizontal: 20
+        // width: '100%',
+        // height: Dimensions.get('window').height / 2,
+        // alignItems: 'center',
+        paddingHorizontal: 20,
+        // backgroundColor: colors.green
     },
     loginInput: {
-        marginTop: 40,
         width: '100%',
         height: 50,
         borderBottomColor: colors.whiteBlue,
@@ -45,7 +49,7 @@ export default StyleSheet.create({
         marginTop: 20
     },
     button: {
-        marginTop: 40
+        marginTop: 20
     },
     alternateButton: {
         color: colors.textPrimary,
@@ -54,5 +58,12 @@ export default StyleSheet.create({
     },
     alternateButtonWrapper: {
         marginTop: 10
+    },
+    errorWrapper: {
+        marginTop: 20,
+        height: 20
+    },
+    errorText: {
+        color: 'red'
     }
 })

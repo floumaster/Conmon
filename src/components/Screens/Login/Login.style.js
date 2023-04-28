@@ -45,7 +45,7 @@ export default StyleSheet.create({
         marginTop: 20
     },
     button: {
-        marginTop: 40
+        marginTop: 20
     },
     alternateButton: {
         color: colors.textPrimary,
@@ -54,5 +54,12 @@ export default StyleSheet.create({
     },
     alternateButtonWrapper: {
         marginTop: 10
+    },
+    errorWrapper: {
+        marginTop: 20,
+        height: 20
+    },
+    errorText: {
+        color: 'red'
     }
 })

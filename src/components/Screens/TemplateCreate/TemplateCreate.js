@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuid } from 'uuid';
 
-import { addTemplate } from '../../../reduxManager/templateSlice'
+import { createTemplate } from '../../../reduxManager/templateSlice'
 import Input from '../../Input'
 import styles from './TemplateCreate.style'
 import Tab from '../../Tab'
@@ -49,12 +49,15 @@ const TemplateCreate = ({ navigation }) => {
     const isButtonDisbled = templateName.length === 0 || spendingsId.length === 0
 
     const templateCreate = () => {
-        dispatch(addTemplate({
-            id: uuid(),
-            name: templateName,
-            description: templateDescription,
-            isAplied: false,
-            spendingsId: spendingsId
+        dispatch(createTemplate({
+            templateInfo: {
+                id: uuid(),
+                name: templateName,
+                description: templateDescription,
+                isApplied: false,
+                user_id: userInfo.id
+            },
+            spendingIds: spendingsId
         }))
         navigation.goBack()
     }

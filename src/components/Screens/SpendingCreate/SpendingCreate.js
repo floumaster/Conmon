@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import DatePicker from 'react-native-date-picker'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,6 +18,8 @@ import screenNames from '../../../constants/screenNames'
 import notificationFrequency from '../../../constants/notificationFrequency'
 import { addSpending } from '../../../reduxManager/spendingsSlice'
 import Tag from '../../Icons/Tag';
+import { createSpending } from '../../../reduxManager/spendingsSlice';
+import moment from 'moment';
 
 const SpendingCreate = ({ navigation, route }) => {
 
@@ -30,6 +32,7 @@ const SpendingCreate = ({ navigation, route }) => {
     const [categoryId, setCategoryId] = useState('')
     const [isDatePickerOpened, setIsDatePickerOpened] = useState(false)
     const [pickerMode, setPickerMode] = useState('date')
+    const userInfo = useSelector(store => store.userSlice.user)
 
     const dispatch = useDispatch()
 
@@ -76,24 +79,24 @@ const SpendingCreate = ({ navigation, route }) => {
     }
 
     const createNewScheduledSpending = () => {
-        dispatch(addSpending({
+        dispatch(createSpending({
             id: uuidv4(),
             name: spendingTitle,
             amount: spendingAmount,
             comment: spendingComment,
             categoryId: categoryId,
             frequency: recurrence,
-            notificationDateStart: date,
-            notificationTimeStart: time,
+            notificationDateStart: moment(date).format('YYYY-MM-DD'),
             isScheduled: true,
             isCompleted: false,
-            creationDate: new Date()
+            creationDate: moment().format('YYYY-MM-DD'),
+            user_id: userInfo.id
         }))
         navigation.goBack()
     }
 
     const createNewUnplannedSpending = () => {
-        dispatch(addSpending({
+        dispatch(createSpending({
             id: uuidv4(),
             name: spendingTitle,
             amount: spendingAmount,
@@ -101,7 +104,7 @@ const SpendingCreate = ({ navigation, route }) => {
             categoryId: categoryId,
             isScheduled: false,
             isCompleted: false,
-            creationDate: new Date()
+            creationDate: moment().format('YYYY-MM-DD')
         }))
         navigation.goBack()
     }
@@ -145,7 +148,6 @@ const SpendingCreate = ({ navigation, route }) => {
                             <DropDown value={notificationFrequency} setValue={setRecurrence} placeholder="Frequency"/>
                         </View>
                         <PrimaryButton text="Set date of notification start" onPress={toggleDateModal}/>
-                        <PrimaryButton text="Set time of notification" onPress={toggleTimeModal}/> 
                     </>
                 }
                 <PrimaryButton

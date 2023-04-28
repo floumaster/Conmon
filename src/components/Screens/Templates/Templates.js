@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, TouchableOpacity, Text, FlatList } from 'react-native'
 import styles from './Templates.style'
 import Tab from '../../Tab'
@@ -53,6 +53,10 @@ const Templates = ({ navigation }) => {
 
     const templates = useSelector(store => store.templates.templates)
     const processedTemplates = [0, ...templates]
+
+    useEffect(() => {
+        console.log(templates)
+    }, [templates])
 
     return (
         <View style={styles.wrapper}>
