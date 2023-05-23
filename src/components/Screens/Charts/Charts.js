@@ -16,7 +16,7 @@ import iconMap from '../../../utils/iconMap';
 import screenNames from '../../../constants/screenNames';
 
 const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
-const barChartLength = Dimensions.get('window').width * 0.8
+const barChartLength = Dimensions.get('window').width * 0.7
 
 const SpengingItem = ({ item, categories, navigation }) => {
 
@@ -96,7 +96,7 @@ const Charts = ({ navigation }) => {
 
     const [periodId, setPeriodId] = useState(0)
     const [isDatePickerOpened, setIsDatePickerOpened] = useState(false)
-    const [isDateFromPicking, setIsDateFromPicking] = useState(false)
+    const [isDateFromPicking, setIsDateFromPicking] = useState(true)
     const [dateFrom, setDateFrom] = useState(new Date())
     const [dateTo, setDateTo] = useState(new Date())
 

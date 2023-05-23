@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     barChartWrapper: {
         marginTop: 70,
-        width: '90%',
+        width: '85%',
         alignItems: 'center'
     },
     periodTitleDisabled: {

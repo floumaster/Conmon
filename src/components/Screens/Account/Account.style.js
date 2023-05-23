@@ -47,5 +47,8 @@ export default StyleSheet.create({
     logoutWrapper: {
         height: '25%',
         justifyContent: 'flex-end'
+    },
+    button: {
+        marginTop: 40
     }
 })

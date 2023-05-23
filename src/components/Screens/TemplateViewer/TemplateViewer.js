@@ -17,7 +17,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Clock from '../../Icons/Clock';
 import screenNames from '../../../constants/screenNames';
 import moment from 'moment';
-import { addSpending } from '../../../reduxManager/spendingsSlice';
+import { createSpending } from '../../../reduxManager/spendingsSlice';
 
 
 const TemplateViewer = ({ navigation, route }) => {
@@ -52,7 +52,7 @@ const TemplateViewer = ({ navigation, route }) => {
 
     const templateCreate = () => {
         chosenSpendings.forEach(spending => {
-            dispatch(addSpending(
+            dispatch(createSpending(
                 {
                     ...spending,
                     completionDate: null,

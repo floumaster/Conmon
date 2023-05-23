@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { View, Text, TextInput } from 'react-native'
 import Tab from "../../Tab/Tab";
 import styles from './Account.style'
@@ -10,12 +10,44 @@ import { useSelector, useDispatch } from "react-redux";
 import DropDown from '../../DropDown'
 import currencies from "../../../constants/currencies";
 import moment from "moment";
-import { deleteUser, setBudget, setCurrency } from "../../../reduxManager/userSlice";
+import { deleteUser, setBudget, setCurrency, setCurrencyAPICall, setBudgetAPICall } from "../../../reduxManager/userSlice";
 import Logout from "../../Icons/Logout";
 import PrimaryButton from "../../Buttons/PrimaryButton/PrimaryButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_ROOT } from "../../../constants/links";
 
 const Account = ({ navigation }) => {
+
+    const setBudgetAPICall = async function(budget, userId) {
+        const response = await fetch(`${API_ROOT}/auth/setBudget`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId,
+                budget
+            })
+        })
+        const parsedResponse = await response.json()
+        return budget
+    }
+    
+    const setCurrencyAPICall = async function(currency, userId) {
+        console.log(currency, userId)
+        const response = await fetch(`${API_ROOT}/auth/setCurrency`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId,
+                currency
+            })
+        })
+        const parsedResponse = await response.json()
+        return budget
+    }
 
     const handleLogout = async () => {
         await AsyncStorage.removeItem('userInfo')
@@ -36,6 +68,14 @@ const Account = ({ navigation }) => {
     const setNewBudget = (budget) => {
         dispatch(setBudget(budget))
     }
+
+    useEffect(() => {
+        setBudgetAPICall(userInfo.monthBudget, userInfo.id)
+    }, [userInfo.monthBudget])
+
+    useEffect(() => {
+        setCurrencyAPICall(userInfo.currency, userInfo.id)
+    }, [userInfo.currency])
 
     return (
         <View style={styles.wrapper}>

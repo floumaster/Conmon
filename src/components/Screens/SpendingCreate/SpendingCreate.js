@@ -104,7 +104,8 @@ const SpendingCreate = ({ navigation, route }) => {
             categoryId: categoryId,
             isScheduled: false,
             isCompleted: false,
-            creationDate: moment().format('YYYY-MM-DD')
+            creationDate: moment().format('YYYY-MM-DD'),
+            user_id: userInfo.id
         }))
         navigation.goBack()
     }
