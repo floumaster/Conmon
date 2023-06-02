@@ -48,7 +48,7 @@ export default StyleSheet.create({
         height: '25%',
         justifyContent: 'flex-end'
     },
-    button: {
+    submitButton: {
         marginTop: 40
     }
 })

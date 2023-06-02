@@ -22,26 +22,26 @@ export const getFCMToken = async () => {
     return fcmToken
 }
 
-export const NotificationListener = () => {
+export const NotificationListener = (navigateToSpendings) => {
   messaging().onNotificationOpenedApp(remoteMessage => {
-    console.log(
-      'Notification caused app to open from background state:',
-      remoteMessage.notification,
-    )
+    if(remoteMessage.notification.title === 'Complete your spending'){
+      //console.log('navigation')
+      navigateToSpendings()
+    }
   });
 
   messaging()
   .getInitialNotification()
   .then(remoteMessage => {
-    if (remoteMessage) {
-      console.log(
-        'Notification caused app to open from quit state:',
-        remoteMessage.notification,
-      );
-    }
+    // if (remoteMessage) {
+    //   console.log(
+    //     'Notification caused app to open from quit state:',
+    //     remoteMessage.notification,
+    //   );
+    // }
   });
 
   messaging().onMessage(async remoteMessage => {
-    console.log("REMOTE MESSAGE", remoteMessage)
+    //console.log("REMOTE MESSAGE", remoteMessage)
   })
 }

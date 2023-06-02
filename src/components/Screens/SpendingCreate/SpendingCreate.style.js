@@ -87,6 +87,22 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         display: 'flex',
         alignItems: 'flex-start'
+    },
+    submitButtonWrapper: {
+        marginTop: 10,
+    },
+    categoryPicker: {
+        marginTop: 0,
+        marginBottom: 10,
+        alignItems: 'center',
+        paddingLeft: 18,
+        color: colors.textPrimary,
+        justifyContent: 'space-between',
+        paddingRight: 15
+    },
+    categoryPickerText: {
+        color: colors.textPrimary,
+        fontSize: 15
     }
 })
 

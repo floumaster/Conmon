@@ -114,7 +114,8 @@ const Charts = ({ navigation }) => {
             case 0:
                 from = moment()
                 to = moment()
-                break;
+                return from.format('YYYY-MM-DD') === moment(spending.completionDate).format('YYYY-MM-DD')
+                && moment(spending.completionDate).format('YYYY-MM-DD') === to.format('YYYY-MM-DD')
             case 1:
                 from = moment().subtract(7,'d')
                 to = moment()

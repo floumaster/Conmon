@@ -13,6 +13,7 @@ const DropDown = ({ value, setValue, placeholder, dropdownStyles }) => {
             save="value"
             placeholder={placeholder}
             searchicon={() => {}}
+            searchPlaceholder=""
             closeicon={
             <Close
                 fill={colors.whiteBlue}

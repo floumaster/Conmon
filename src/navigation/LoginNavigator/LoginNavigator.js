@@ -21,7 +21,6 @@ const LoginNavigator = (props) => {
     const userInfo = useSelector(store => store.userSlice.user)
 
     const autoLogin = async () => {
-        console.log('here')
         const userJSON = await AsyncStorage.getItem('userInfo')
         const user = JSON.parse(userJSON)
         if(!userInfo && user)

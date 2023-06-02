@@ -10,6 +10,7 @@ import styles from './SpendingCreate.style'
 import BackArrow from '../../Icons/BackArrow'
 import colors from '../../../constants/colors'
 import PrimaryButton from '../../Buttons/PrimaryButton'
+import CommonButton from '../../Buttons/CommonButton/CommonButton';
 import Input from '../../Input'
 import DropDown from '../../DropDown'
 import Money from '../../Icons/Money'
@@ -141,21 +142,35 @@ const SpendingCreate = ({ navigation, route }) => {
                         Icon={() => <Categories fill={colors.textPrimary} width={18}/>}
                     />
                 </View>
-                <PrimaryButton text="Chose a category" onPress={navigateToCategoryList}/>
+                <CommonButton
+                    text="Chose a category"
+                    onPress={navigateToCategoryList}
+                    style={styles.categoryPicker}
+                    textStyle={styles.categoryPickerText}
+                    isIconShown={true}
+                    isCompleted={categoryId.length}
+                />
                 {isSpendingScheduled && 
                     <>
                         <View style={styles.partWrapper}>
                             <Text style={styles.partTitle}>Pick notifications frequency</Text>
-                            <DropDown value={notificationFrequency} setValue={setRecurrence} placeholder="Frequency"/>
+                            <DropDown value={notificationFrequency} setValue={setRecurrence} placeholder="Frequency" />
                         </View>
-                        <PrimaryButton text="Set date of notification start" onPress={toggleDateModal}/>
+                        <CommonButton
+                            text="Set date of notification start"
+                            onPress={toggleDateModal}
+                            style={styles.categoryPicker}
+                            textStyle={styles.categoryPickerText}
+                        />
                     </>
                 }
-                <PrimaryButton
-                    text={spendingInfo ? "Edit spending" : "Create spending"}
-                    onPress={isSpendingScheduled ? createNewScheduledSpending : createNewUnplannedSpending}
-                    disabled={!isCreateButtonEnabled}
-                /> 
+                <View style={styles.submitButtonWrapper}>
+                    <PrimaryButton
+                        text={spendingInfo ? "Edit spending" : "Create spending"}
+                        onPress={isSpendingScheduled ? createNewScheduledSpending : createNewUnplannedSpending}
+                        disabled={!isCreateButtonEnabled}
+                    />
+                </View> 
             </Tab>
             <DatePicker
                 mode={pickerMode}

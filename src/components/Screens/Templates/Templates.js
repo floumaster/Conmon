@@ -54,10 +54,6 @@ const Templates = ({ navigation }) => {
     const templates = useSelector(store => store.templates.templates)
     const processedTemplates = [0, ...templates]
 
-    useEffect(() => {
-        console.log(templates)
-    }, [templates])
-
     return (
         <View style={styles.wrapper}>
             <Tab

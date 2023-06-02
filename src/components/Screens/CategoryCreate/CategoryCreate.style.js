@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     iconsList: {
         marginTop: 20,
         width: '100%',
-        maxHeight: 300,
+        maxHeight: 250,
         marginBottom: 10
     },
     newIconWrapper: {
@@ -69,6 +69,19 @@ const styles = StyleSheet.create({
     },
     createButtonWrapper: {
         padding: 10,
+        marginBottom: 20
+    },
+    categoryPicker: {
+        marginTop: 0,
+        marginBottom: 10,
+        alignItems: 'center',
+        paddingLeft: 18,
+        color: colors.textPrimary,
+        justifyContent: 'space-between',
+        paddingRight: 15
+    },
+    categoryPickerText: {
+        color: colors.textPrimary,
     }
 })
 

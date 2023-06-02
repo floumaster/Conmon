@@ -10,6 +10,7 @@ import colors from '../../../constants/colors'
 import screenNames from '../../../constants/screenNames'
 import Tag from '../../Icons/Tag'
 import PrimaryButton from '../../Buttons/PrimaryButton'
+import CommonButton from '../../Buttons/CommonButton/CommonButton';
 import iconMap from '../../../utils/iconMap'
 import { editCategory, createCategory } from '../../../reduxManager/categorySlice'
 
@@ -79,7 +80,6 @@ const CategoryCreate = ({ navigation, route }) => {
             <Tab
                 headerTitle={categoryInfo ? "Edit the category" : "Create a new category"}
                 style={{flex: 1}}
-                isScrollable={true}
                 HeaderIconLeft={() => <BackArrow width={20} fill={colors.white} onPress={navigation.goBack} />}
             >
                 <View style={styles.titleInputWrapper}>
@@ -106,7 +106,14 @@ const CategoryCreate = ({ navigation, route }) => {
                     />
                 </View>
                 <View style={styles.colorChooseWrapper}>
-                    <PrimaryButton text="Choose a color for your icon" onPress={navigateToColorPicker}/>
+                    <CommonButton
+                        text="Choose a color for your icon"
+                        onPress={navigateToColorPicker}
+                        style={styles.categoryPicker}
+                        textStyle={styles.categoryPickerText}
+                        isIconShown={true}
+                        isCompleted={categoryColor?.length}
+                    />
                 </View>
                 <View style={styles.createButtonWrapper}>
                     <PrimaryButton

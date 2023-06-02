@@ -97,13 +97,13 @@ export default StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.subText,
         borderRadius: 10,
-        padding: 10,
+        paddingHorizontal: 10,
         height: '100%',
         marginBottom: 16
     },
     spendingsRowWrapper: {
         flexDirection: 'row',
         columnGap: 10,
-        marginBottom: 10
+        marginVertical: 5
     }
 })

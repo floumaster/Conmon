@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
         width: '100%',
         opacity: 0.3,
         height: 100,
-        marginBottom: 10
     },
     templateWrapper: {
         backgroundColor: colors.primary,
@@ -31,8 +30,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '100%',
         height: 100,
-        marginBottom: 10,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     activeWrapper: {
         borderColor: colors.whiteBlue,
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
     },
     templateStatus: {
         color: colors.textPrimary
-    }
+    },
 })
 
 export default styles

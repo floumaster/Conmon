@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -16,10 +17,20 @@ import CategoriesIcon from '../../components/Icons/Categories';
 import Money from '../../components/Icons/Money';
 import Templates from '../../components/Icons/Templates';
 import HomeNavigator from '../HomeNavigator/HomeNavigator';
+import { getFCMToken, NotificationListener, requestUserPermission } from '../../utils/notifications/notifications';
 
 const Tab = createBottomTabNavigator();
 
-export default function RootNavigator() {
+export default function RootNavigator({navigation}) {
+
+  const navigateToSpendings = () => {
+    navigation.navigate(screenNames.SpendingsStack)
+}
+
+  useEffect(() => {
+    requestUserPermission()
+    NotificationListener(navigateToSpendings)
+  }, []);
 
   return (
       <Tab.Navigator

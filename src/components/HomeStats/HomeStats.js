@@ -13,9 +13,8 @@ import colors from '../../constants/colors'
 const HomeStats = () => {
 
     const spendings = useSelector(store => store.spendings?.spendings)
-    .filter(spending => spending.isCompleted && moment().startOf('month') < moment(spending.completionDate))
+    .filter(spending => spending.isCompleted && moment().startOf('month') <= moment(spending.completionDate))
     const categories = useSelector(store => store.categories?.categories)
-
     const sum = spendings.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.amount), 0)
 
     const getSectionsFromSpendings = () => {
