@@ -88,6 +88,7 @@ const Spending = ({ navigation, route }) => {
                     text={"Complete spending"}
                     onPress={onSubmit}
                     disabled={spending.isCompleted}
+                    style={{marginBottom: 80}}
                 /> 
             </Tab>
         </View>

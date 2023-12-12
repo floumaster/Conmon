@@ -1,1 +1,2 @@
-export const API_ROOT = 'http://77.47.204.60:3000'
+export const API_ROOT = 'http://192.168.0.107:3000'
+export const API2_ROOT = 'http://192.168.0.107:3001'

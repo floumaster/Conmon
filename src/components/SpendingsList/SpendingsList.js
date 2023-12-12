@@ -59,8 +59,10 @@ const TasksList = ({
                             {
                                 spendingPair.map(spending => {
                                     const comment = spending.comment || ''
+                                    const name = spending.name || ''
 
-                                    const processedComment = comment.length > 20 ? `${comment.slice(0, 15)}...` : comment
+                                    const processedComment = comment.length > 20 ? `${comment.replace(/(\r\n|\n|\r)/gm, "").slice(0, 15)}...` : comment
+                                    const processedSpendingName = name.length > 11 ? `${name.replace(/(\r\n|\n|\r)/gm, "").slice(0, 11)}...` : name
 
                                     const status = spending.isCompleted ? 'Completed' : 'Waiting to complete'
 
@@ -86,7 +88,7 @@ const TasksList = ({
                                         return (
                                             <TouchableOpacity style={styles.spendingWrapper} onPress={() => {navigateToSpendingInfo(spending.id)}}>
                                                 <View style={styles.spendingTitleWrapper}>
-                                                    <Text style={styles.spendingTitle}>{spending.name}</Text>
+                                                    <Text style={styles.spendingTitle}>{processedSpendingName}</Text>
                                                     <View style={[styles.markerWrapper, additionalMarkerWrapperStyle]}>
                                                         <Statusicon width={18} fill={colors.white} />
                                                     </View>

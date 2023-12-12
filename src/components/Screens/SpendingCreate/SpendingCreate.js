@@ -18,8 +18,10 @@ import Categories from '../../Icons/Categories'
 import screenNames from '../../../constants/screenNames'
 import notificationFrequency from '../../../constants/notificationFrequency'
 import { addSpending } from '../../../reduxManager/spendingsSlice'
+import { API2_ROOT } from '../../../constants/links';
 import Tag from '../../Icons/Tag';
 import { createSpending } from '../../../reduxManager/spendingsSlice';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import moment from 'moment';
 
 const SpendingCreate = ({ navigation, route }) => {
@@ -111,6 +113,26 @@ const SpendingCreate = ({ navigation, route }) => {
         navigation.goBack()
     }
 
+    const handleImageProcess = async () => {
+        const result = await launchImageLibrary({
+            mediaType: 'photo',
+            includeBase64: true
+        });
+        const base64Img = result.assets[0].base64
+        const response = await fetch(`${API2_ROOT}/getInfoFromReceipt`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: base64Img
+        })
+        const parsedResponse = await response.json()
+        setSpendingTitle('Supermarket shopping')
+        setSpendingAmount(`${parsedResponse.amount}`)
+        setSpendingComment(parsedResponse.commend)
+        setCategoryId('4a6d8dd5-c612-4395-8db0-352ced90ac75')
+    }
+
     return (
         
         <View style={styles.wrapper}>
@@ -164,6 +186,14 @@ const SpendingCreate = ({ navigation, route }) => {
                         />
                     </>
                 }
+                {!isSpendingScheduled && (
+                    <View style={styles.submitButtonWrapper}>
+                        <PrimaryButton
+                            text={"Use receipt photo"}
+                            onPress={handleImageProcess}
+                        />
+                    </View>
+                )}
                 <View style={styles.submitButtonWrapper}>
                     <PrimaryButton
                         text={spendingInfo ? "Edit spending" : "Create spending"}
